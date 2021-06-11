@@ -1,14 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { ApplicationViews } from "./ApplicationViews";
-import { Login } from "./auth/Login";
-import { Register } from "./auth/Register";
-import { NavBar } from "./nav/NavBar";
-import { Footer } from "./footer/Footer";
+import { Login } from "./components/auth/Login";
+import { Register } from "./components/auth/Register";
+import { NavBar } from "./components/nav/NavBar";
+import { Footer } from "./components/footer/Footer";
 import "./Priority.css";
-import { UserProvider } from "./users/UserProvider";
+import { UserProvider } from "./components/users/UserProvider";
+import { ApplicationViews } from "./components/ApplicationViews";
+import { Protected } from "./components/auth/Protected";
 //the application component. will handle routing to the application views if the user is logged in, or the login page if a user is not logged in
-export const ServeStillMore = () => (
+export const Priority = () => (
     <>
         <Route
             render={() => {
