@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import "./Register.css"
 
 //This is a form to register a new user to the database
 export const Register = () => {
@@ -14,17 +15,10 @@ export const Register = () => {
         lastName: "",
         email: "",
         password: "",
-        groupId: 0,
-        roleId: 0,
-        phone: "",
-        address: "",
-        city: "",
-        state: "",
-        photo: "",
-        callTime: "",
-        canCall: true,
-        familyId: 0,
-        primaryMember: false
+        priority: "",
+        why: "",
+        what: "",
+        how: 5
     })
     //state variable controls displaying the dialog box if the person registering has an email account that already exists in the database
     const [conflictDialog, setConflictDialog] = useState(false)
@@ -63,9 +57,14 @@ export const Register = () => {
         history.push("/Login")
     }
     //takes the user back to the dashboard screen if they do not want to register a new member
-    const advancePage2 = (event) => {
+    const advancePage = (event) => {
         event.preventDefault()
-        setCurrentPage(2)
+        setCurrentPage(currentPage + 1)
+    }
+    //takes the user back to the dashboard screen if they do not want to register a new member
+    const backPage = (event) => {
+        event.preventDefault()
+        setCurrentPage(currentPage - 1)
     }
     //a form split up into two pages with a ternary. Could not do two different return statements with a conditional because it would kick me out of an input box when typing.
     return (
@@ -76,48 +75,97 @@ export const Register = () => {
                     <h2 className="h3 mb-3 font-weight-normal">Sign Up</h2>
                     <FormGroup>
                         <Label for="firstName">First Name</Label>
-                        <Input onChange={handleInputChange} type="text" name="firstName" className="form-control" placeholder="first name" value={registerUser.firstName} id="firstName" autoComplete="given-name" required />
+                        <Input onChange={handleInputChange} type="text" name="firstName" placeholder="first name" value={registerUser.firstName} id="firstName" autoComplete="given-name" required />
                     </FormGroup>
                     <FormGroup>
                         <Label for="lastName">Last Name</Label>
-                        <Input onChange={handleInputChange} type="text" name="lastName" className="form-control" placeholder="last name" value={registerUser.lastName} id="lastName" autoComplete="family-name" required />
+                        <Input onChange={handleInputChange} type="text" name="lastName" placeholder="last name" value={registerUser.lastName} id="lastName" autoComplete="family-name" required />
                     </FormGroup>
                     <FormGroup>
                         <Label for="inputEmail">Email address</Label>
-                        <Input onChange={handleInputChange} type="email" name="email" className="form-control" placeholder="email" value={registerUser.email} id="email" autoComplete="email" required />
+                        <Input onChange={handleInputChange} type="email" name="email" placeholder="email" value={registerUser.email} id="email" autoComplete="email" required />
                     </FormGroup>
                     <FormGroup>
                         <Label for="inputPassword">Create Password</Label>
-                        <Input onChange={handleInputChange} type="password" name="password" className="form-control" placeholder="password" value={registerUser.password} id="password" autoComplete="new-password" required />
+                        <Input onChange={handleInputChange} type="password" name="password" placeholder="password" value={registerUser.password} id="password" autoComplete="new-password" required />
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={advancePage2}>Next</Button>
-                        <Button onClick={handleCancelRegister}> Cancel </Button>
+                        <Button onClick={handleCancelRegister}>Cancel</Button>
+                        <Button onClick={advancePage}>Next</Button>
                     </FormGroup>
                 </Form>
             </main>}
             {currentPage === 2 && <main style={{ textAlign: "center" }}>
-                <h1>Lost River Call Center</h1>
-                <h3>A Little More Information Is Needed</h3>
-                <Form className="form--login">
-                    <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
+                <h1>Priority</h1>
+                <h3>What is the most important thing to you?</h3>
+                <Form>
                     <FormGroup>
-                        <Label for="inputEmail"> Phone Number </Label>
-                        <Input onChange={handleInputChange} value={registerUser.phone} id="phone" type="phone" name="phone" className="form-control" placeholder="9805554466" autoComplete="tel" required />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="inputEmail"> Address </Label>
-                        <Input onChange={handleInputChange} value={registerUser.address} id="address" type="address" name="address" className="form-control" placeholder="address" autoComplete="street-address" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="inputEmail"> City </Label>
-                        <Input onChange={handleInputChange} value={registerUser.city} id="city" type="text" name="city" className="form-control" placeholder="city" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Button onClick={handleRegister}>Register</Button>
-                        <Button onClick={handleCancelRegister}> Cancel </Button>
+                        <Input onChange={handleInputChange} value={registerUser.priority} id="priority" type="text" name="priority" placeholder="Ex: My children" required />
                     </FormGroup>
                 </Form>
+                <FormGroup>
+                    <Button onClick={handleCancelRegister}>Cancel</Button>
+                    <Button onClick={backPage}>Go Back</Button>
+                    <Button onClick={advancePage}>Next</Button>
+                </FormGroup>
+            </main>}
+            {currentPage === 3 && <main style={{ textAlign: "center" }}>
+                <div className="whyWhatHowHeader">
+                    <h3>what</h3>
+                    <h3>What</h3>
+                    <h3>How</h3>
+                </div>
+                <h3>Why is this your priority?</h3>
+                <Form>
+                    <FormGroup>
+                        <Input onChange={handleInputChange} value={registerUser.why} id="why" type="text" name="why" placeholder="Ex: I want my children to be good examples for the next generation" required />
+                    </FormGroup>
+                </Form>
+                <FormGroup>
+                    <Button onClick={handleCancelRegister}>Cancel</Button>
+                    <Button onClick={backPage}>Go Back</Button>
+                    <Button onClick={advancePage}>Next</Button>
+                </FormGroup>
+            </main>}
+            {currentPage === 4 && <main style={{ textAlign: "center" }}>
+                <div className="whyWhatHowHeader">
+                    <h3>Why</h3>
+                    <h3>What</h3>
+                    <h3>How</h3>
+                </div>
+                <h3>What can you do to prioritize your priority?</h3>
+                <Form>
+                    <FormGroup>
+                        <Input onChange={handleInputChange} value={registerUser.what} id="what" type="text" name="what" placeholder="Ex: read to them everyday" required />
+                    </FormGroup>
+                </Form>
+                <FormGroup>
+                    <Button onClick={handleCancelRegister}>Cancel</Button>
+                    <Button onClick={backPage}>Go Back</Button>
+                    <Button onClick={advancePage}>Next</Button>
+                </FormGroup>
+            </main>}
+            {currentPage === 5 && <main style={{ textAlign: "center" }}>
+                <div className="whyWhatHowHeader">
+                    <h3>Why</h3>
+                    <h3>What</h3>
+                    <h3>How</h3>
+                </div>
+                <h3>Whether you realize it or not, you have just set a goal.</h3>
+                <h3>Goals are best met if you make a daily effort to achieve them. Large goals can be satisfying if they are tracked with small milestones.</h3>
+                <h3>How much time can you commit every day to prioritizing your priority?</h3>
+                <Form>
+                    <FormGroup>
+                        <h3>I vow to spend
+                        <Input onChange={handleInputChange} value={registerUser.how} id="how" type="number" name="how" max="480" min="5" step="5" required />
+                        minutes a day on my priority</h3>
+                    </FormGroup>
+                </Form>
+                <FormGroup>
+                    <Button onClick={handleCancelRegister}>Cancel</Button>
+                    <Button onClick={backPage}>Go Back</Button>
+                    <Button onClick={handleRegister}>Register</Button>
+                </FormGroup>
             </main>}
         </>
     )
