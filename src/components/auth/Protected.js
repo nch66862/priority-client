@@ -19,7 +19,7 @@ export const Protected = (props) => {
                     setLoggedInUserId(res.logged_in_user_id)
                     setIsLoading(false)
                 } else {
-                    localStorage.removeItem("priority_user_id")
+                    localStorage.removeItem("priority_user_token")
                     localStorage.removeItem("priority_user_admin")
                     history.push("/login")
                 }

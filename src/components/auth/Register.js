@@ -11,8 +11,8 @@ export const Register = () => {
     const [currentPage, setCurrentPage] = useState(1)
     //the main state variable that will be saved to the database
     const [registerUser, setRegisterUser] = useState({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         priority: "",
@@ -35,7 +35,7 @@ export const Register = () => {
     //performs a post to the database when registering a new memeber
     const handleRegister = (event) => {
         event.preventDefault()
-        return fetch("https://localhost:8000/register", {
+        return fetch("http://localhost:8000/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export const Register = () => {
             .then(res => res.json())
             .then(res => {
                 if ("valid" in res && res.valid) {
-                    localStorage.setItem("rare_user_id", res.token)
+                    localStorage.setItem("priority_user_token", res.token)
                     history.push("/")
                 }
             })
@@ -74,12 +74,12 @@ export const Register = () => {
                 <Form>
                     <h2 className="h3 mb-3 font-weight-normal">Sign Up</h2>
                     <FormGroup>
-                        <Label for="firstName">First Name</Label>
-                        <Input onChange={handleInputChange} type="text" name="firstName" placeholder="first name" value={registerUser.firstName} id="firstName" autoComplete="given-name" required />
+                        <Label for="first_name">First Name</Label>
+                        <Input onChange={handleInputChange} type="text" name="first_name" placeholder="first name" value={registerUser.first_name} id="first_name" autoComplete="given-name" required />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="lastName">Last Name</Label>
-                        <Input onChange={handleInputChange} type="text" name="lastName" placeholder="last name" value={registerUser.lastName} id="lastName" autoComplete="family-name" required />
+                        <Label for="last_name">Last Name</Label>
+                        <Input onChange={handleInputChange} type="text" name="last_name" placeholder="last name" value={registerUser.last_name} id="last_name" autoComplete="family-name" required />
                     </FormGroup>
                     <FormGroup>
                         <Label for="inputEmail">Email address</Label>

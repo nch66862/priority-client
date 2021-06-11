@@ -12,9 +12,6 @@ export const NavBar = () => {
     return (
             <ul className="navbar">
                 <li className="navbar__item">
-                    <button onClick={() => history.push(`/users/detail/${profile}`)}>My Profile</button>
-                </li>
-                <li className="navbar__item">
                     <Link className="navbar__link" to="/">Home</Link>
                 </li>
                 <li className="navbar__item">
