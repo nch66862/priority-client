@@ -4,7 +4,6 @@ import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
 import { NavBar } from "./components/nav/NavBar";
 import { Footer } from "./components/footer/Footer";
-import "./Priority.css";
 import { UserProvider } from "./components/users/UserProvider";
 import { ApplicationViews } from "./components/ApplicationViews";
 import { Protected } from "./components/auth/Protected";

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { userStorageKey } from "./authSettings"
 // import { authApi } from "./authSettings"
 //This is a form to log an existing user in
@@ -98,9 +98,9 @@ export const Login = () => {
                     <button onClick={logInAsDeacon} className="btn signInButton" type="submit">Sign in as Deacon</button>
                 </form>
             </section>
-            {/* <section className="link--register">
+            <section className="link--register">
                 <Link to="/register">Register for an account</Link>
-            </section> */}
+            </section>
         </main>
     )
 }

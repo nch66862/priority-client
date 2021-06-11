@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 //This is a form to register a new user to the database
 export const Register = () => {
     //useHistory keeps track of the URL visted in a URL stack
@@ -60,60 +62,64 @@ export const Register = () => {
         event.preventDefault()
         history.push("/Login")
     }
+    //takes the user back to the dashboard screen if they do not want to register a new member
+    const advancePage2 = (event) => {
+        event.preventDefault()
+        setCurrentPage(2)
+    }
     //a form split up into two pages with a ternary. Could not do two different return statements with a conditional because it would kick me out of an input box when typing.
     return (
-        currentPage === "first" ? <main style={{ textAlign: "center" }}>
-            <dialog className="dialog dialog--password" open={conflictDialog}>
-                <div>Account with that email address already exists</div>
-                <button className="button--close" onClick={e => setConflictDialog(false)}>Close</button>
-            </dialog>
-            <h1>Lost River Call Center</h1>
-            <form className="form--login" >
-                <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
-                <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input onChange={handleInputChange} type="text" name="firstName" className="form-control" placeholder="first name" value={registerUser.firstName} id="firstName" autoComplete="given-name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input onChange={handleInputChange} type="text" name="lastName" className="form-control" placeholder="last name" value={registerUser.lastName} id="lastName" autoComplete="family-name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input onChange={handleInputChange} type="email" name="email" className="form-control" placeholder="email address" value={registerUser.email} id="email" autoComplete="email" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Create Password </label>
-                    <input onChange={handleInputChange} type="password" name="email" className="form-control" placeholder="create password" value={registerUser.password} id="password" autoComplete="new-password" required />
-                </fieldset>
-                <fieldset>
-                    <button className="btn" > Next </button>
-                    <button className="cancelButton" type="cancel" onClick={handleCancelRegister}> Cancel </button>
-                </fieldset>
-            </form>
-        </main> : <main style={{ textAlign: "center" }}>
-            <h1>Lost River Call Center</h1>
-            <h3>A Little More Information Is Needed</h3>
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Phone Number </label>
-                    <input onChange={handleInputChange} value={registerUser.phone} id="phone" type="phone" name="phone" className="form-control" placeholder="9805554466" autoComplete="tel" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Address </label>
-                    <input onChange={handleInputChange} value={registerUser.address} id="address" type="address" name="address" className="form-control" placeholder="address" autoComplete="street-address" />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> City </label>
-                    <input onChange={handleInputChange} value={registerUser.city} id="city" type="text" name="city" className="form-control" placeholder="city" />
-                </fieldset>
-                <fieldset>
-                    <button className="btn" type="submit"> Register </button>
-                    <button className="cancelButton" type="cancel" onClick={handleCancelRegister}> Cancel </button>
-                </fieldset>
-            </form>
-        </main>
+        <>
+            {currentPage === 1 && <main style={{ textAlign: "center" }}>
+                <h1>Priority</h1>
+                <Form>
+                    <h2 className="h3 mb-3 font-weight-normal">Sign Up</h2>
+                    <FormGroup>
+                        <Label for="firstName">First Name</Label>
+                        <Input onChange={handleInputChange} type="text" name="firstName" className="form-control" placeholder="first name" value={registerUser.firstName} id="firstName" autoComplete="given-name" required />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="lastName">Last Name</Label>
+                        <Input onChange={handleInputChange} type="text" name="lastName" className="form-control" placeholder="last name" value={registerUser.lastName} id="lastName" autoComplete="family-name" required />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="inputEmail">Email address</Label>
+                        <Input onChange={handleInputChange} type="email" name="email" className="form-control" placeholder="email" value={registerUser.email} id="email" autoComplete="email" required />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="inputPassword">Create Password</Label>
+                        <Input onChange={handleInputChange} type="password" name="password" className="form-control" placeholder="password" value={registerUser.password} id="password" autoComplete="new-password" required />
+                    </FormGroup>
+                    <FormGroup>
+                        <Button onClick={advancePage2}>Next</Button>
+                        <Button onClick={handleCancelRegister}> Cancel </Button>
+                    </FormGroup>
+                </Form>
+            </main>}
+            {currentPage === 2 && <main style={{ textAlign: "center" }}>
+                <h1>Lost River Call Center</h1>
+                <h3>A Little More Information Is Needed</h3>
+                <Form className="form--login">
+                    <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
+                    <FormGroup>
+                        <Label for="inputEmail"> Phone Number </Label>
+                        <Input onChange={handleInputChange} value={registerUser.phone} id="phone" type="phone" name="phone" className="form-control" placeholder="9805554466" autoComplete="tel" required />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="inputEmail"> Address </Label>
+                        <Input onChange={handleInputChange} value={registerUser.address} id="address" type="address" name="address" className="form-control" placeholder="address" autoComplete="street-address" />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="inputEmail"> City </Label>
+                        <Input onChange={handleInputChange} value={registerUser.city} id="city" type="text" name="city" className="form-control" placeholder="city" />
+                    </FormGroup>
+                    <FormGroup>
+                        <Button onClick={handleRegister}>Register</Button>
+                        <Button onClick={handleCancelRegister}> Cancel </Button>
+                    </FormGroup>
+                </Form>
+            </main>}
+        </>
     )
 }
 
