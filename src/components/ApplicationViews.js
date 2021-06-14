@@ -3,6 +3,7 @@ import { Route, useHistory } from "react-router-dom"
 import { UserContext, UserProvider } from "./users/UserProvider"
 import { Protected } from "./auth/Protected"
 import { Loading } from "./nav/Loading"
+import { Profile } from "./profile/Profile"
 
 export const ApplicationViews = () => {
     const { logUserIn } = useContext(UserContext)
@@ -11,7 +12,6 @@ export const ApplicationViews = () => {
     const [serverIsLoading, setServerIsLoading] = useState(true)
     const history = useHistory()
     useEffect(() => {
-        debugger
         let currentUser = {}
         if (loggedInUser === "Nick") {
             currentUser = {
@@ -47,6 +47,7 @@ export const ApplicationViews = () => {
             <UserProvider>
                 <Route exact path="/">
                     <Protected>
+                        <Profile />
                     </Protected>
                 </Route>
                 <Route exact path="/community">
