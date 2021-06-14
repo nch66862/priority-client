@@ -5,16 +5,40 @@ import { Protected } from "./auth/Protected"
 import { Loading } from "./nav/Loading"
 
 export const ApplicationViews = () => {
-    const { serverAwake } = useContext(UserContext)
+    const { logUserIn } = useContext(UserContext)
+    const loggedInUser = localStorage.getItem("logged_in_user")
+    const [loggedInUserObj, setLoggedInUserObj] = useState({})
+    const [serverIsLoading, setServerIsLoading] = useState(true)
     const history = useHistory()
     useEffect(() => {
         debugger
-        if (serverAwake) {
-            debugger
+        let currentUser = {}
+        if (loggedInUser === "Nick") {
+            currentUser = {
+                username: "nickcarver74@gmail.com",
+                password: "pass"
+            }
+        }
+        else if (loggedInUser === "Logan") {
+            currentUser = {
+                username: "loganlanning",
+                password: "pass"
+            }
+        }
+        logUserIn(currentUser)
+            .then(res => {
+                if ("valid" in res && res.valid) {
+                    localStorage.setItem("priority_user_token", res.token)
+                    setLoggedInUserObj(res)
+                }
+            })
+    }, [])
+    useEffect(() => {
+        if (loggedInUserObj.valid) {
+            setServerIsLoading(false)
             history.push("/")
         }
-    }, [serverAwake])
-
+    }, [loggedInUserObj])
     return <>
         <main style={{
             margin: "5rem 2rem",
@@ -50,7 +74,7 @@ export const ApplicationViews = () => {
                     </Protected>
                 </Route>
                 <Route exact path="/loading">
-                    {!serverAwake && <Loading />}
+                    {serverIsLoading && <Loading />}
                 </Route>
             </UserProvider>
         </main>

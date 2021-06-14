@@ -1,11 +1,11 @@
 import React, { createContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export const UserContext = createContext()
 
 export const UserProvider = (props) => {
     const [rareUsers, setUsers] = useState([])
     const [loggedInUserId, setLoggedInUserId] = useState([])
-    const [serverAwake, setServerAwake] = useState(false)
     const logUserIn = (credentials) => {
         return fetch("http://localhost:8000/login",{
             method: "POST",
@@ -15,12 +15,6 @@ export const UserProvider = (props) => {
             body: JSON.stringify(credentials)
         })
         .then(res => res.json())
-        .then(res => {
-            if ("valid" in res && res.valid) {
-                localStorage.setItem("priority_user_token", res.token)
-                setServerAwake(true)
-            }
-        })
 }
     const getAllUsers = () => {
         return fetch("http://localhost:8000/users",{
@@ -157,7 +151,7 @@ export const UserProvider = (props) => {
             getAllUsers, rareUsers, getUserById, changeSubscribed, checkSubscribed, 
             changeAuthorStatus, checkAuthenticated, getInactiveUsers, getCurrentUser, 
             updateUser, changeRank, loggedInUserId, setLoggedInUserId, subscriberCount, 
-            deleteUser, serverAwake, logUserIn }}>
+            deleteUser, logUserIn }}>
             {props.children}
         </UserContext.Provider>
     )

@@ -12,14 +12,12 @@ export const Priority = () => (
     <>
         <Route
             render={() => {
-                if (sessionStorage.getItem("Priority_User")) {
+                if (localStorage.getItem("Priority_User") || localStorage.getItem("logged_in_user")) {
                     return (
                         <>
                             <section className="mainBody">
                                 <UserProvider>
-                                    <Protected>
-                                        <NavBar />
-                                    </Protected>
+                                    <NavBar />
                                     <ApplicationViews />
                                 </UserProvider>
                             </section>
@@ -32,9 +30,7 @@ export const Priority = () => (
             }}
         />
         <Route path="/login">
-            <UserProvider>
-                <Login />
-            </UserProvider>
+            <Login />
         </Route>
         <Route path="/register">
             <Register />

@@ -4,11 +4,7 @@ import "./NavBar.css"
 import { UserContext } from "../users/UserProvider"
 
 export const NavBar = () => {
-    let profile = 0
     const history = useHistory()
-    const {getCurrentUser} = useContext(UserContext)   
-    getCurrentUser()
-        .then(res => profile=res)
     return (
             <ul className="navbar">
                 <li className="navbar__item">
