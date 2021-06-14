@@ -16,13 +16,13 @@ export const ApplicationViews = () => {
         let currentUser = {}
         if (loggedInUser === "Nick") {
             currentUser = {
-                username: "nickcarver74@gmail.com",
+                username: "nick@nickcarver.com",
                 password: "pass"
             }
         }
         else if (loggedInUser === "Logan") {
             currentUser = {
-                username: "loganlanning",
+                username: "logan@loganlanning.com",
                 password: "pass"
             }
         }
