@@ -8,7 +8,7 @@ export const NavBar = () => {
     return (
             <ul className="navbar">
                 <li className="navbar__item">
-                    <Link className="navbar__link" to="/">Home</Link>
+                    <Link className="navbar__link" to="/">Profile</Link>
                 </li>
                 <li className="navbar__item">
                     <Link className="navbar__link" to="/posts">Posts</Link>
@@ -22,26 +22,6 @@ export const NavBar = () => {
                 <li className="navbar__item">
                     <Link className="navbar__link" to="/users">Users</Link>
                 </li>
-                {localStorage.getItem("rare_user_admin") === "true"
-                    &&
-                    <>
-                        <li className="navbar__item">
-                            <Link className="navbar__link" to="/posts/unapproved-posts">Unapproved Posts</Link>
-                        </li>
-                        <li className="navbar__item">
-                            <Link className="navbar__link" to="/users/inactive">Inactive Users</Link>
-                        </li>
-                        <li className="navbar__item">
-                            <Link className="navbar__link" to="/tags">Tags</Link>
-                        </li>
-                        <li className="navbar__item">
-                            <Link className="navbar__link" to="/categories">Categories</Link>
-                        </li>
-                        <li className="navbar__item">
-                            <Link className="navbar__link" to="/reactions">Reactions</Link>
-                        </li>
-                    </>
-                }
                 {
                     (localStorage.getItem("rare_user_id") !== null) ?
                         <li className="nav-item">

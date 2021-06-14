@@ -9,8 +9,22 @@ export const Profile = () => {
             .then(response => setUserProfile(response))
     }, [])
     return (
-        <div>
-            HI
-        </div>
+        <>
+            <h1>Today</h1>
+            <h4>{new Date().toLocaleDateString("en-US",
+                {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    timeZone: "UTC"
+                })}
+            </h4>
+            <h2>{userProfile.priority.priority} is my priority</h2>
+            <div>because {userProfile.priority.why}.</div>
+            <div>
+                HI
+            </div>
+        </>
     )
 }
