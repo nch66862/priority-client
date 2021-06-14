@@ -5,53 +5,70 @@ export const UserContext = createContext()
 export const UserProvider = (props) => {
     const [rareUsers, setUsers] = useState([])
     const [loggedInUserId, setLoggedInUserId] = useState([])
-    const getAllUsers = () => {
-        return fetch("https://nac-rare-server.herokuapp.com/users",{
+    const [serverAwake, setServerAwake] = useState(false)
+    const logUserIn = (credentials) => {
+        return fetch("http://localhost:8000/login",{
+            method: "POST",
             headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Content-Type":"application/json",
+            },
+            body: JSON.stringify(credentials)
+        })
+        .then(res => res.json())
+        .then(res => {
+            if ("valid" in res && res.valid) {
+                localStorage.setItem("priority_user_token", res.token)
+                setServerAwake(true)
+            }
+        })
+}
+    const getAllUsers = () => {
+        return fetch("http://localhost:8000/users",{
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
         .then(setUsers)
     }
     const getInactiveUsers = () => {
-        return fetch("https://nac-rare-server.herokuapp.com/users/inactive",{
+        return fetch("http://localhost:8000/users/inactive",{
             headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
         .then(setUsers)
     }
     const getUserById = (userId) =>{
-        return fetch(`https://nac-rare-server.herokuapp.com/users/${userId}`,{
+        return fetch(`http://localhost:8000/users/${userId}`,{
             headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
     }
     const updateUser = (updatedUser) => {
-        return fetch(`https://nac-rare-server.herokuapp.com/users/${updatedUser.id}`,{
+        return fetch(`http://localhost:8000/users/${updatedUser.id}`,{
             method: "PUT",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
             body: JSON.stringify(updatedUser)
         })
     }
     // const getSubcriptions = (userId) => {
-    //     return fetch(`https://nac-rare-server.herokuapp.com/subscriptions/${userId}`)
+    //     return fetch(`http://localhost:8000/subscriptions/${userId}`)
     //     .then(res => res.json())
     //     .then(res => console.log("subcriptions: ",res))
     // }
     const checkSubscribed = (authorId) => {
-        return fetch("https://nac-rare-server.herokuapp.com/users/subscription_status", {
+        return fetch("http://localhost:8000/users/subscription_status", {
             method: "POST",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
             body: JSON.stringify({
                 "author_id": authorId
@@ -60,21 +77,21 @@ export const UserProvider = (props) => {
             .then(res => res.json())
     }
     const changeSubscribed = (subscribing, subscription) => {
-        return fetch("https://nac-rare-server.herokuapp.com/users/subscription",{
+        return fetch("http://localhost:8000/users/subscription",{
             method: subscribing ? "POST" : "DELETE",
             // method:"POST",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
             body: JSON.stringify(subscription)
         })
     }
     const checkAuthenticated = () => {
-        return fetch(`https://nac-rare-server.herokuapp.com/check-active`, {
+        return fetch(`http://localhost:8000/check-active`, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
             .then(res => res.json())
@@ -83,11 +100,11 @@ export const UserProvider = (props) => {
             })
     }
     const changeAuthorStatus = (userId, action) => {
-        return fetch(`https://nac-rare-server.herokuapp.com/change-active`,{
+        return fetch(`http://localhost:8000/change-active`,{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
             body: JSON.stringify({
                 "action": action,
@@ -97,46 +114,50 @@ export const UserProvider = (props) => {
     }
 
     const getCurrentUser = () => {
-        return fetch("https://nac-rare-server.herokuapp.com/users/user_profile",{
+        return fetch("http://localhost:8000/users/user_profile",{
             headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
     }
 
     const subscriberCount = () => {
-        return fetch("https://nac-rare-server.herokuapp.com/users/subscriber_count",{
+        return fetch("http://localhost:8000/users/subscriber_count",{
             headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
     }
 
     const changeRank = (updatedUser) => {
-        return fetch(`https://nac-rare-server.herokuapp.com/change-rank`,{
+        return fetch(`http://localhost:8000/change-rank`,{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
             body: JSON.stringify(updatedUser)
         })
     }
 
     const deleteUser = (userId) => {
-        return fetch(`https://nac-rare-server.herokuapp.com/users/${userId}`,{
+        return fetch(`http://localhost:8000/users/${userId}`,{
             method:"DELETE",
             headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
         })
         .then(() => getAllUsers())
     }
 
     return (
-        <UserContext.Provider value={{ getAllUsers, rareUsers, getUserById, changeSubscribed, checkSubscribed, changeAuthorStatus, checkAuthenticated, getInactiveUsers, getCurrentUser, updateUser, changeRank, loggedInUserId, setLoggedInUserId, subscriberCount, deleteUser }}>
+        <UserContext.Provider value={{ 
+            getAllUsers, rareUsers, getUserById, changeSubscribed, checkSubscribed, 
+            changeAuthorStatus, checkAuthenticated, getInactiveUsers, getCurrentUser, 
+            updateUser, changeRank, loggedInUserId, setLoggedInUserId, subscriberCount, 
+            deleteUser, serverAwake, logUserIn }}>
             {props.children}
         </UserContext.Provider>
     )

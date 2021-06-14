@@ -32,7 +32,9 @@ export const Priority = () => (
             }}
         />
         <Route path="/login">
-            <Login />
+            <UserProvider>
+                <Login />
+            </UserProvider>
         </Route>
         <Route path="/register">
             <Register />

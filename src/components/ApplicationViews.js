@@ -1,9 +1,20 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import { UserProvider } from "./users/UserProvider"
+import React, { useContext, useEffect, useState } from "react"
+import { Route, useHistory } from "react-router-dom"
+import { UserContext, UserProvider } from "./users/UserProvider"
 import { Protected } from "./auth/Protected"
+import { Loading } from "./nav/Loading"
 
 export const ApplicationViews = () => {
+    const { serverAwake } = useContext(UserContext)
+    const history = useHistory()
+    useEffect(() => {
+        debugger
+        if (serverAwake) {
+            debugger
+            history.push("/")
+        }
+    }, [serverAwake])
+
     return <>
         <main style={{
             margin: "5rem 2rem",
@@ -37,6 +48,9 @@ export const ApplicationViews = () => {
                 <Route exact path="/profile/edit">
                     <Protected>
                     </Protected>
+                </Route>
+                <Route exact path="/loading">
+                    {!serverAwake && <Loading />}
                 </Route>
             </UserProvider>
         </main>
