@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+}
+
+.navbar__link {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.navbar__logo {
+    max-height: 6rem;
+}
