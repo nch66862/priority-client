@@ -1,24 +1,18 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ListGroup, ListGroupItem } from 'reactstrap';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import { Button, Modal } from 'reactstrap';
+import { HistoryForm } from "./HistoryForm";
 
 //just a container for a footer for completeness
 export const Profile = () => {
-    const { getProfile, getWhat } = useContext(ProfileContext)
+    const { getProfile } = useContext(ProfileContext)
     const [userProfile, setUserProfile] = useState({})
-    const [what, setWhat] = useState([])
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     useEffect(() => {
         getProfile()
             .then(response => setUserProfile(response))
-            .then(() => getWhat())
-            .then(response => setWhat(response))
     }, [])
-    const selectWhat = () => {
-        console.log("go go go")
-    }
     return (
         <>
             <h1>Today</h1>
@@ -35,17 +29,7 @@ export const Profile = () => {
             <div>because {userProfile.priority?.why}.</div>
             <Button onClick={toggle}>Input Time</Button>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalBody>
-                    <RadioGroup>
-                        {what.map(singleWhat => {
-                            return <RadioButton value={singleWhat.id} key={singleWhat.id}>{singleWhat.what}</RadioButton>
-                        })}
-                    </RadioGroup>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={toggle}>Submit</Button>{' '}
-                    <Button color="secondary" onClick={toggle}>Cancel</Button>
-                </ModalFooter>
+                <HistoryForm userProfile={userProfile} toggle={toggle}/>
             </Modal>
         </>
     )
