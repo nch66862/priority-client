@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Form, FormGroup } from 'reactstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
+import { isYesterday } from 'date-fns'
 
 //just a container for a footer for completeness
 export const HistoryForm = ({ userProfile, toggle, modal }) => {
@@ -13,17 +14,26 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
         time_spent: userProfile.priority?.how,
         goal_date: new Date()
     })
-    // dates
-    // account creation day
-    const original_date = new Date(userProfile.priority.creation_date)
-    // current day
-    const today = new Date()
-    // see if history on those days and days in between
-    // ask user 1 by 1 starting with current day and working backwards
+    const [visibleDate, setVisibleDate] = useState("today")
     useEffect(() => {
         getWhat()
             .then(response => setWhat(response))
     }, [])
+    const formatVisibleDate = (date) => {
+        const is_yesterday = isYesterday(date)
+        if (is_yesterday) {
+            setVisibleDate("yesterday")
+        } else {
+            setVisibleDate(date.toLocaleDateString("en-US",
+                {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                    timeZone: "UTC"
+                }))
+        }
+    }
     const handleChangeWhat = (whatId) => {
         let newHistoryEvent = { ...historyEvent }
         newHistoryEvent.what_id = whatId
@@ -35,10 +45,10 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
         setHistoryEvent(newHistoryEvent)
     }
     const handleChangeDate = (date) => {
-        debugger
         let newHistoryEvent = { ...historyEvent }
         newHistoryEvent.goal_date = date
         setHistoryEvent(newHistoryEvent)
+        formatVisibleDate(date)
     }
     const handleSubmitHistory = () => {
         submitHistory(historyEvent)
@@ -46,26 +56,27 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
     }
     return (
         <Modal isOpen={modal} toggle={toggle}>
-            <ModalBody>
-                <ModalHeader>I spent my time...</ModalHeader>
-                <RadioGroup onChange={handleChangeWhat}>
-                    {what.map(singleWhat => {
-                        return <RadioButton rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
-                    })}
-                </RadioGroup>
-                <div>
-                    for <input onChange={handleChangeTime} type="number" max={480} min={5} step={5} value={historyEvent.time} required /> minutes today.
-                </div>
-                <Label>Select A Day</Label>
-                <DatePicker
-                    onChange={handleChangeDate}
-                    value={historyEvent.goal_date}
-                />
-            </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={handleSubmitHistory}>Submit</Button>
-                <Button color="secondary" onClick={toggle}>Cancel</Button>
-            </ModalFooter>
+            <Form>
+                <ModalBody>
+                    <ModalHeader>I spent my time...</ModalHeader>
+                    <RadioGroup onChange={handleChangeWhat}>
+                        {what.map(singleWhat => {
+                            return <RadioButton rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
+                        })}
+                    </RadioGroup>
+                    <div>
+                        for <input onChange={handleChangeTime} type="number" max={480} min={5} step={5} value={historyEvent.time} required /> minutes {visibleDate}.
+                    </div>
+                    <FormGroup>
+                        <Label>Change the Date</Label><br></br>
+                        <DatePicker onChange={handleChangeDate} value={historyEvent.goal_date} />
+                    </FormGroup>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={handleSubmitHistory}>Submit</Button>
+                    <Button color="secondary" onClick={toggle}>Cancel</Button>
+                </ModalFooter>
+            </Form>
         </Modal>
     )
 }
