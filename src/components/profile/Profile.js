@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ListGroup, ListGroupItem } from 'reactstrap';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 //just a container for a footer for completeness
 export const Profile = () => {
@@ -15,6 +16,9 @@ export const Profile = () => {
             .then(() => getWhat())
             .then(response => setWhat(response))
     }, [])
+    const selectWhat = () => {
+        console.log("go go go")
+    }
     return (
         <>
             <h1>Today</h1>
@@ -32,11 +36,11 @@ export const Profile = () => {
             <Button onClick={toggle}>Input Time</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalBody>
-                    <ListGroup>
+                    <RadioGroup>
                         {what.map(singleWhat => {
-                            return <ListGroupItem active tag="button" action>{singleWhat.what}</ListGroupItem>
+                            return <RadioButton value={singleWhat.id} key={singleWhat.id}>{singleWhat.what}</RadioButton>
                         })}
-                    </ListGroup>
+                    </RadioGroup>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={toggle}>Submit</Button>{' '}
