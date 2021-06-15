@@ -3,6 +3,8 @@ import { Route, useHistory } from "react-router-dom"
 import { UserContext, UserProvider } from "./users/UserProvider"
 import { Protected } from "./auth/Protected"
 import { Loading } from "./nav/Loading"
+import { Profile } from "./profile/Profile"
+import { ProfileProvider } from "./profile/ProfileProvider"
 
 export const ApplicationViews = () => {
     const { logUserIn } = useContext(UserContext)
@@ -11,17 +13,16 @@ export const ApplicationViews = () => {
     const [serverIsLoading, setServerIsLoading] = useState(true)
     const history = useHistory()
     useEffect(() => {
-        debugger
         let currentUser = {}
         if (loggedInUser === "Nick") {
             currentUser = {
-                username: "nickcarver74@gmail.com",
+                username: "nick@nickcarver.com",
                 password: "pass"
             }
         }
         else if (loggedInUser === "Logan") {
             currentUser = {
-                username: "loganlanning",
+                username: "logan@loganlanning.com",
                 password: "pass"
             }
         }
@@ -45,37 +46,40 @@ export const ApplicationViews = () => {
             lineHeight: "1.75rem"
         }}>
             <UserProvider>
-                <Route exact path="/">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/community">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/leaderboard">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/subscriptions">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/priority/edit">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/what/edit/:whatId(\d+)">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/profile/edit">
-                    <Protected>
-                    </Protected>
-                </Route>
-                <Route exact path="/loading">
-                    {serverIsLoading && <Loading />}
-                </Route>
+                <ProfileProvider>
+                    <Route exact path="/">
+                        <Protected>
+                            <Profile />
+                        </Protected>
+                    </Route>
+                    <Route exact path="/community">
+                        <Protected>
+                        </Protected>
+                    </Route>
+                    <Route exact path="/leaderboard">
+                        <Protected>
+                        </Protected>
+                    </Route>
+                    <Route exact path="/subscriptions">
+                        <Protected>
+                        </Protected>
+                    </Route>
+                    <Route exact path="/priority/edit">
+                        <Protected>
+                        </Protected>
+                    </Route>
+                    <Route exact path="/what/edit/:whatId(\d+)">
+                        <Protected>
+                        </Protected>
+                    </Route>
+                    <Route exact path="/profile/edit">
+                        <Protected>
+                        </Protected>
+                    </Route>
+                    <Route exact path="/loading">
+                        {serverIsLoading && <Loading />}
+                    </Route>
+                </ProfileProvider>
             </UserProvider>
         </main>
     </>
