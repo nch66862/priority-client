@@ -3,9 +3,8 @@ import { ProfileContext } from "./ProfileProvider"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Form, FormGroup } from 'reactstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
-import { isYesterday } from 'date-fns'
+import { isYesterday, format } from 'date-fns'
 
-//just a container for a footer for completeness
 export const HistoryForm = ({ userProfile, toggle, modal }) => {
     const { getWhat, submitHistory } = useContext(ProfileContext)
     const [what, setWhat] = useState([])
@@ -44,13 +43,15 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
         newHistoryEvent.time_spent = event.target.value
         setHistoryEvent(newHistoryEvent)
     }
-    const handleChangeDate = (date) => {
+    const handleChangeDate = (datetime) => {
         let newHistoryEvent = { ...historyEvent }
-        newHistoryEvent.goal_date = date
+        newHistoryEvent.goal_date = datetime
         setHistoryEvent(newHistoryEvent)
-        formatVisibleDate(date)
+        formatVisibleDate(datetime)
     }
     const handleSubmitHistory = () => {
+        historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
+        debugger
         submitHistory(historyEvent)
             .then(() => toggle())
     }
@@ -65,7 +66,7 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
                         })}
                     </RadioGroup>
                     <div>
-                        for <input onChange={handleChangeTime} type="number" max={480} min={5} step={5} value={historyEvent.time} required /> minutes {visibleDate}.
+                        for <input onChange={handleChangeTime} type="number" max={480} min={5} step={5} value={historyEvent.time_spent} required /> minutes {visibleDate}.
                     </div>
                     <FormGroup>
                         <Label>Change the Date</Label><br></br>
