@@ -28,9 +28,7 @@ export const Profile = () => {
             <h2>{userProfile.priority?.priority} is my priority</h2>
             <div>because {userProfile.priority?.why}.</div>
             <Button onClick={toggle}>Input Time</Button>
-            <Modal isOpen={modal} toggle={toggle}>
-                <HistoryForm userProfile={userProfile} toggle={toggle}/>
-            </Modal>
+            {modal && <HistoryForm userProfile={userProfile} toggle={toggle} modal={modal} />}
         </>
     )
 }

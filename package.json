@@ -7,7 +7,6 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.0.1",
-    "rc-input-number": "^7.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-radio-buttons": "^1.2.2",
