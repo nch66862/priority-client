@@ -23,8 +23,17 @@ export const ProfileProvider = (props) => {
         })
             .then(res => res.json())
     }
+    const submitHistory = () => {
+        return fetch("http://localhost:8000/history", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            }
+        })
+    }
     return (
-        <ProfileContext.Provider value={{ getProfile, getWhat }}>
+        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory }}>
             {props.children}
         </ProfileContext.Provider>
     )
