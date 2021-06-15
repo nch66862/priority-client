@@ -4,8 +4,7 @@ import './index.css';
 import { Priority } from './Priority';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom"
-// import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <React.StrictMode>
