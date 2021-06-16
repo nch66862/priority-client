@@ -16,7 +16,7 @@ export const Profile = () => {
     }, [])
     return (
         <>
-        <What />
+        <What userProfile={userProfile} />
             <h1>Today</h1>
             <h4>{new Date().toLocaleDateString("en-US",
                 {

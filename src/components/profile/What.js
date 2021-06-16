@@ -1,70 +1,57 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
-import { Button, Form, ListGroup, ListGroupItem } from 'reactstrap';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
-import DatePicker from 'react-date-picker';
-import { isYesterday, format } from 'date-fns'
+import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
 
-export const What = ({ userProfile, toggle, modal }) => {
-    const { getWhat, submitHistory } = useContext(ProfileContext)
-    const [what, setWhat] = useState([])
-    const [historyEvent, setHistoryEvent] = useState({
-        what_id: "",
-        goal_date: new Date()
+export const What = ({ userProfile }) => {
+    const { getWhat, submitWhat } = useContext(ProfileContext)
+    const [whats, setWhats] = useState([])
+    const [showNewWhat, setShowNewWhat] = useState(false)
+    const [what, setWhat] = useState({
+        what: "",
+        priority_id: userProfile.priority?.id
     })
-    const [visibleDate, setVisibleDate] = useState("today")
     useEffect(() => {
         getWhat()
             .then(response => setWhat(response))
     }, [])
-    const formatVisibleDate = (date) => {
-        const is_yesterday = isYesterday(date)
-        if (is_yesterday) {
-            setVisibleDate("yesterday")
-        } else {
-            setVisibleDate(date.toLocaleDateString("en-US",
-                {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                    timeZone: "UTC"
-                }))
-        }
-    }
-    const handleChangeWhat = (whatId) => {
-        let newHistoryEvent = { ...historyEvent }
+    const handleAddWhat = (whatId) => {
+        let newHistoryEvent = { ...what }
         newHistoryEvent.what_id = whatId
-        setHistoryEvent(newHistoryEvent)
+        setWhat(newHistoryEvent)
     }
-    const handleChangeTime = (event) => {
-        let newHistoryEvent = { ...historyEvent }
-        newHistoryEvent.time_spent = event.target.value
-        setHistoryEvent(newHistoryEvent)
-    }
-    const handleChangeDate = (datetime) => {
-        let newHistoryEvent = { ...historyEvent }
+    const handleInputChange = (datetime) => {
+        let newHistoryEvent = { ...what }
         newHistoryEvent.goal_date = datetime
-        setHistoryEvent(newHistoryEvent)
-        formatVisibleDate(datetime)
+        setWhat(newHistoryEvent)
     }
-    const handleSubmitHistory = () => {
-        historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
-        debugger
-        submitHistory(historyEvent)
-            .then(() => toggle())
+    const handleDeleteWhat = (datetime) => {
+        let newHistoryEvent = { ...what }
+        newHistoryEvent.goal_date = datetime
+        setWhat(newHistoryEvent)
+    }
+    const handleSubmitWhat = () => {
+        submitWhat(what)
     }
     return (
         <>
-            <ListGroup onChange={handleChangeWhat}>
-                {what.map(singleWhat => {
-                    return <ListGroupItem key={singleWhat.id}>{singleWhat.what}</ListGroupItem>
+            <h3>What will I prioritize?</h3>
+            <Button color="secondary" onClick={handleAddWhat}> + </Button>
+            <ListGroup>
+                {whats.map(singleWhat => {
+                    return (
+                        <>
+                            <ListGroupItem key={singleWhat.id}>{singleWhat.what}</ListGroupItem>
+                            <Button color="danger" onClick={handleDeleteWhat}>Delete</Button>
+                        </>
+                    )
                 })}
             </ListGroup>
-            <Form>
-                <Button color="primary" onClick={handleSubmitHistory}>Submit</Button>
-                <Button color="secondary" onClick={toggle}>Cancel</Button>
-            </Form>
+            {showNewWhat && (
+                <>
+                    <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" />
+                    <Button color="danger" onClick={handleDeleteWhat}>Delete</Button>
+                </>
+            )}
         </>
     )
 }
