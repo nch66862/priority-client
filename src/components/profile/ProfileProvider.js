@@ -37,7 +37,7 @@ export const ProfileProvider = (props) => {
             .then(() => getWhat())
     }
     const deleteWhat = (whatId) => {
-        return fetch(`http://localhost:8000/what${whatId}`, {
+        return fetch(`http://localhost:8000/what/${whatId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
