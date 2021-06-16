@@ -12,7 +12,7 @@ export const What = ({ userProfile }) => {
     })
     useEffect(() => {
         getWhat()
-            .then(response => setWhat(response))
+            .then(response => setWhats(response))
     }, [])
     const handleAddWhat = (whatId) => {
         let newHistoryEvent = { ...what }
