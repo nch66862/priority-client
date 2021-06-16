@@ -1,48 +1,48 @@
-import React, { useContext } from "react"
-import { Link, useHistory } from "react-router-dom"
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 import "./NavBar.css"
 import { UserContext } from "../users/UserProvider"
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from "reactstrap"
 
 export const NavBar = () => {
     const history = useHistory()
+    const handleLogout = () => {
+        localStorage.removeItem("priority_user_token")
+        localStorage.removeItem("priority_user_admin")
+        localStorage.removeItem("logged_in_user")
+        history.push("/login")
+    }
     return (
-            <ul className="navbar">
-                <li className="navbar__item">
-                    <Link className="navbar__link" to="/">Profile</Link>
-                </li>
-                <li className="navbar__item">
-                    <Link className="navbar__link" to="/posts">Posts</Link>
-                </li>
-                <li className="navbar__item">
-                    <Link className="navbar__link" to="/posts/create">New Post</Link>
-                </li>
-                <li className="navbar__item">
-                    <Link className="navbar__link" to="/posts/my-posts">My Posts</Link>
-                </li>
-                <li className="navbar__item">
-                    <Link className="navbar__link" to="/users">Users</Link>
-                </li>
-                {
-                    (localStorage.getItem("rare_user_id") !== null) ?
-                        <li className="nav-item">
-                            <button className="nav-link fakeLink"
-                                onClick={() => {
-                                    localStorage.removeItem("rare_user_id")
-                                    localStorage.removeItem("rare_user_admin")
-                                    history.push({ pathname: "/" })
-                                }}
-                            >Logout</button>
-                        </li>
-                        :
-                        <>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/login">Login</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/register">Register</Link>
-                            </li>
-                        </>
-                }
-            </ul>
+        <Navbar>
+            <NavbarBrand href="/">Priority</NavbarBrand>
+            <NavItem>
+                <NavLink href="/community">Community</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="/leaderboard">Leaderboard</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="/subscriptions">Subscriptions</NavLink>
+            </NavItem>
+            {(localStorage.getItem("priority_user_token") !== null) && (
+                <>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                            Profile
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem>
+                                Change Visibility
+                            </DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem onClick={handleLogout}>
+                                Logout
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </>
+            )}
+            <NavbarText>Welcome</NavbarText>
+        </Navbar>
     )
 }
