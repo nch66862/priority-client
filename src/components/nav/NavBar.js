@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import "./NavBar.css"
 import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Modal, ModalBody, ModalFooter, ModalHeader, Button } from "reactstrap"
@@ -6,8 +6,11 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import { ProfileContext } from "../profile/ProfileProvider";
 
 export const NavBar = () => {
-    const { changePrivacy } = useContext(ProfileContext)
+    const { changePrivacy, getProfile } = useContext(ProfileContext)
     const [modal, setModal] = useState(false);
+    const [privacy, setPrivacy] = useState({
+        is_public: false
+    });
     const toggle = () => setModal(!modal);
     const history = useHistory()
     const handleLogout = () => {
@@ -16,10 +19,16 @@ export const NavBar = () => {
         localStorage.removeItem("logged_in_user")
         history.push("/login")
     }
-    const handleChangePrivacy = (event) => {
-        debugger
-        changePrivacy(event.target.value)
+    const handleChangePrivacy = (value) => {
+        changePrivacy({
+            is_public: value
+        })
+            .then(() => setPrivacy(value))
     }
+    useEffect(() => {
+        getProfile()
+            .then (res => setPrivacy(res.priority.is_public))
+    }, [])
     return (
         <>
             <Navbar>
@@ -57,8 +66,8 @@ export const NavBar = () => {
                     <ModalBody>
                         <ModalHeader>My Profile</ModalHeader>
                         <RadioGroup horizontal onChange={handleChangePrivacy}>
-                            <RadioButton rootColor="black" pointColor="Green" value="Public" key={1}>Public</RadioButton>
-                            <RadioButton rootColor="black" pointColor="Green" value="Private" key={2}>Private</RadioButton>
+                            <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
+                            <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
                         </RadioGroup>
                     </ModalBody>
                     <ModalFooter>

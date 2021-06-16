@@ -56,14 +56,14 @@ export const ProfileProvider = (props) => {
             body: JSON.stringify(historyEvent)
         })
     }
-    const changePrivacy = (historyEvent) => {
+    const changePrivacy = (profileIsPublic) => {
         return fetch("http://localhost:8000/users/change_privacy", {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
-            body: JSON.stringify(historyEvent)
+            body: JSON.stringify(profileIsPublic)
         })
     }
     return (
