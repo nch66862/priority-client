@@ -3,8 +3,7 @@ import { ProfileContext } from "./ProfileProvider"
 import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
 
 export const What = ({ userProfile }) => {
-    const { getWhat, submitWhat } = useContext(ProfileContext)
-    const [whats, setWhats] = useState([])
+    const { getWhat, saveWhat, deleteWhat, whats, setWhats } = useContext(ProfileContext)
     const [showNewWhat, setShowNewWhat] = useState(false)
     const [what, setWhat] = useState({
         what: "",
@@ -12,25 +11,24 @@ export const What = ({ userProfile }) => {
     })
     useEffect(() => {
         getWhat()
-            .then(response => setWhats(response))
     }, [])
-    const handleAddWhat = (whatId) => {
-        let newHistoryEvent = { ...what }
-        newHistoryEvent.what_id = whatId
-        setWhat(newHistoryEvent)
+    const handleAddWhat = () => {
+        setShowNewWhat(true)
     }
-    const handleInputChange = (datetime) => {
-        let newHistoryEvent = { ...what }
-        newHistoryEvent.goal_date = datetime
-        setWhat(newHistoryEvent)
+    const handleInputChange = (event) => {
+        let newWhat = { ...what }
+        newWhat.what = event.target.value
+        setWhat(newWhat)
     }
-    const handleDeleteWhat = (datetime) => {
-        let newHistoryEvent = { ...what }
-        newHistoryEvent.goal_date = datetime
-        setWhat(newHistoryEvent)
+    const handleDeleteWhat = (event) => {
+        deleteWhat(event.target.id)
     }
     const handleSubmitWhat = () => {
-        submitWhat(what)
+        saveWhat(what)
+            .then(() => setShowNewWhat(false))
+    }
+    const handleCloseForm = () => {
+        setShowNewWhat(false)
     }
     return (
         <>
@@ -39,17 +37,18 @@ export const What = ({ userProfile }) => {
             <ListGroup>
                 {whats.map(singleWhat => {
                     return (
-                        <>
-                            <ListGroupItem key={singleWhat.id}>{singleWhat.what}</ListGroupItem>
-                            <Button color="danger" onClick={handleDeleteWhat}>Delete</Button>
-                        </>
+                        <div key={singleWhat.id}>
+                            <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
+                            <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>
+                        </div>
                     )
                 })}
             </ListGroup>
             {showNewWhat && (
                 <>
                     <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" />
-                    <Button color="danger" onClick={handleDeleteWhat}>Delete</Button>
+                    <Button onClick={handleSubmitWhat}>Save</Button>
+                    <Button onClick={handleCloseForm}>Cancel</Button>
                 </>
             )}
         </>
