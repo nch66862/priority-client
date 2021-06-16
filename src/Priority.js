@@ -6,7 +6,7 @@ import { NavBar } from "./components/nav/NavBar";
 import { Footer } from "./components/footer/Footer";
 import { UserProvider } from "./components/users/UserProvider";
 import { ApplicationViews } from "./components/ApplicationViews";
-import { Protected } from "./components/auth/Protected";
+import { ProfileProvider } from "./components/profile/ProfileProvider";
 //the application component. will handle routing to the application views if the user is logged in, or the login page if a user is not logged in
 export const Priority = () => (
     <>
@@ -17,8 +17,10 @@ export const Priority = () => (
                         <>
                             <section className="mainBody">
                                 <UserProvider>
-                                    <NavBar />
-                                    <ApplicationViews />
+                                    <ProfileProvider>
+                                        <NavBar />
+                                        <ApplicationViews />
+                                    </ProfileProvider>
                                 </UserProvider>
                             </section>
                             <Footer />
