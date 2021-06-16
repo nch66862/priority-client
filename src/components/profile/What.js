@@ -3,7 +3,7 @@ import { ProfileContext } from "./ProfileProvider"
 import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
 
 export const What = ({ userProfile }) => {
-    const { getWhat, saveWhat, deleteWhat, whats, setWhats } = useContext(ProfileContext)
+    const { getWhat, saveWhat, deleteWhat, whats } = useContext(ProfileContext)
     const [showNewWhat, setShowNewWhat] = useState(false)
     const [what, setWhat] = useState({
         what: "",
@@ -12,11 +12,18 @@ export const What = ({ userProfile }) => {
     useEffect(() => {
         getWhat()
     }, [])
+    useEffect(() => {
+        let newWhat = { ...what }
+        newWhat.priority_id = userProfile.priority?.id
+        setWhat(newWhat)
+    }, [userProfile])
     const handleAddWhat = () => {
         setShowNewWhat(true)
     }
     const handleInputChange = (event) => {
         let newWhat = { ...what }
+        console.log(newWhat)
+        console.log(userProfile)
         newWhat.what = event.target.value
         setWhat(newWhat)
     }

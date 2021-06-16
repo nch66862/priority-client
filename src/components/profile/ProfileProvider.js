@@ -27,7 +27,7 @@ export const ProfileProvider = (props) => {
     }
     const saveWhat = (newWhat) => {
         return fetch("http://localhost:8000/what", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
