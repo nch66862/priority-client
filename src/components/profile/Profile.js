@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
-import { Button, Modal } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { HistoryForm } from "./HistoryForm";
+import { What } from "./What";
 
 //just a container for a footer for completeness
 export const Profile = () => {
@@ -15,6 +16,7 @@ export const Profile = () => {
     }, [])
     return (
         <>
+        <What />
             <h1>Today</h1>
             <h4>{new Date().toLocaleDateString("en-US",
                 {
