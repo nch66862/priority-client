@@ -57,7 +57,7 @@ export const ProfileProvider = (props) => {
         })
     }
     return (
-        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats }}>
+        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat }}>
             {props.children}
         </ProfileContext.Provider>
     )
