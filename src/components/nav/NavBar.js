@@ -4,6 +4,7 @@ import "./NavBar.css"
 import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from "reactstrap"
 import { ProfileContext } from "../profile/ProfileProvider";
 import { VisibilityModal } from "./privacy/VisibilityModal";
+import { PriorityModal } from "./profile/PriorityModal";
 
 export const NavBar = () => {
     const { getProfile } = useContext(ProfileContext)
@@ -63,6 +64,7 @@ export const NavBar = () => {
                 <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
             </Navbar>
             <VisibilityModal visibilityModal={visibilityModal}  toggleVisibilityModal={toggleVisibilityModal} />
+            <PriorityModal priorityModal={priorityModal}  togglePriorityModal={togglePriorityModal} />
         </>
     )
 }
