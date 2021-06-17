@@ -37,7 +37,7 @@ export const What = ({ userProfile }) => {
         <div>
             <div className="whatHeader">
                 <h3>What will I prioritize?</h3>
-                {! profileId && <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
+                {!profileId && <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
             </div>
             <ListGroup>
                 {whats.map(singleWhat => {
