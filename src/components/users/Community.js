@@ -1,29 +1,31 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom";
-import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
+import { ListGroup, ListGroupItem, Label, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { UserContext } from "./UserProvider";
 
 export const Community = () => {
-    const { getPublicProfiles, users } = useContext(UserContext)
+    const { getPublicProfiles, profiles } = useContext(UserContext)
     const history = useHistory()
     useEffect(() => {
         getPublicProfiles()
         // eslint-disable-next-line
     }, [])
-    const handleOpenProfile = (event) => history.push(`/profiles/${event.target.id}`)
+    const handleOpenProfile = (event) => {
+        debugger
+        history.push(`/profiles/${event.target.id}`
+    )}
     return (
         <div>
             <h1>Community</h1>
             <ListGroup>
-                {users.map(singleUser => {
+                {profiles.map(singleProfile => {
                     return (
-                        <div key={singleUser.id} id={singleUser.id} onClick={handleOpenProfile}>
-                            {/* <ListGroupItem>{singleUser}
-                                <ListGroupItemHeading>List group item heading</ListGroupItemHeading>
-                                <ListGroupItemText>
-                                    Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-                                </ListGroupItemText>
-                            </ListGroupItem> */}
+                        <div key={singleProfile.id} id={singleProfile.id} onClick={handleOpenProfile}>
+                            <ListGroupItem>
+                                <Label id={singleProfile.id}>{singleProfile.priority_user.user.first_name}</Label>
+                                <ListGroupItemHeading id={singleProfile.id}>{singleProfile.priority}</ListGroupItemHeading>
+                                <ListGroupItemText id={singleProfile.id}>{singleProfile.why}</ListGroupItemText>
+                            </ListGroupItem>
                         </div>
                     )
                 })}

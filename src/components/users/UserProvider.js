@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 export const UserContext = createContext()
 
 export const UserProvider = (props) => {
-    const [users, setUsers] = useState([])
+    const [profiles, setProfile] = useState([])
     const [loggedInUserId, setLoggedInUserId] = useState([])
     const logUserIn = (credentials) => {
         return fetch("http://localhost:8000/login",{
@@ -22,7 +22,7 @@ export const UserProvider = (props) => {
             }
         })
         .then(res => res.json())
-        .then(setUsers)
+        .then(setProfile)
     }
     const getUserById = (userId) =>{
         return fetch(`http://localhost:8000/users/${userId}`,{
@@ -71,7 +71,7 @@ export const UserProvider = (props) => {
 
     return (
         <UserContext.Provider value={{ 
-            getPublicProfiles, users, getUserById, changeSubscribed, checkSubscribed, 
+            getPublicProfiles, profiles, getUserById, changeSubscribed, checkSubscribed, 
             checkAuthenticated,
             loggedInUserId, setLoggedInUserId, logUserIn }}>
             {props.children}
