@@ -8,6 +8,7 @@ import { ProfileContext } from "../profile/ProfileProvider";
 export const NavBar = () => {
     const { changePrivacy, getProfile } = useContext(ProfileContext)
     const [modal, setModal] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
     const [privacy, setPrivacy] = useState({
         is_public: false
     });
@@ -27,25 +28,28 @@ export const NavBar = () => {
     }
     useEffect(() => {
         getProfile()
-            .then(res => setPrivacy(res.priority))
+            .then(res => {
+                setPrivacy(res.priority)
+                setCurrentUser(res)
+            })
         // eslint-disable-next-line
     }, [])
     return (
         <>
             <Navbar>
                 <NavbarBrand href="/">Priority</NavbarBrand>
-                <NavItem>
+                <NavItem className="navItem">
                     <NavLink href="/community">Community</NavLink>
                 </NavItem>
-                <NavItem>
+                <NavItem className="navItem">
                     <NavLink href="/leaderboard">Leaderboard</NavLink>
                 </NavItem>
-                <NavItem>
+                <NavItem className="navItem">
                     <NavLink href="/subscriptions">Subscriptions</NavLink>
                 </NavItem>
                 {(localStorage.getItem("priority_user_token") !== null) && (
                     <>
-                        <UncontrolledDropdown nav inNavbar>
+                        <UncontrolledDropdown nav inNavbar className="navItem">
                             <DropdownToggle nav caret>
                                 Profile
                             </DropdownToggle>
@@ -61,7 +65,7 @@ export const NavBar = () => {
                         </UncontrolledDropdown>
                     </>
                 )}
-                <NavbarText>Welcome</NavbarText>
+                <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
             </Navbar>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalBody>

@@ -40,13 +40,15 @@ export const What = ({ userProfile }) => {
         setShowNewWhat(false)
     }
     return (
-        <>
-            <h3>What will I prioritize?</h3>
-            <Button color="secondary" onClick={handleAddWhat}> + </Button>
+        <div>
+            <div className="whatHeader">
+                <h3>What will I prioritize?</h3>
+                <Button color="secondary" onClick={handleAddWhat}> + </Button>
+            </div>
             <ListGroup>
                 {whats.map(singleWhat => {
                     return (
-                        <div key={singleWhat.id}>
+                        <div key={singleWhat.id} className="whatItem">
                             <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
                             <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>
                         </div>
@@ -60,6 +62,6 @@ export const What = ({ userProfile }) => {
                     <Button onClick={handleCloseForm}>Cancel</Button>
                 </>
             )}
-        </>
+        </div>
     )
 }

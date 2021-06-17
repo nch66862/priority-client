@@ -17,3 +17,7 @@
 .navbar__logo {
     max-height: 6rem;
 }
+
+.navItem {
+    list-style-type: none;
+}
