@@ -5,11 +5,11 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
 import { isYesterday, format } from 'date-fns'
 
-export const HistoryForm = ({ userProfile, toggle, modal }) => {
+export const HistoryForm = ({ profile, toggle, modal }) => {
     const { getWhat, submitHistory, whats } = useContext(ProfileContext)
     const [historyEvent, setHistoryEvent] = useState({
         what_id: "",
-        time_spent: userProfile.priority?.how,
+        time_spent: profile.priority?.how,
         goal_date: new Date()
     })
     const [visibleDate, setVisibleDate] = useState("today")

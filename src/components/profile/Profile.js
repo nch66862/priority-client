@@ -10,20 +10,15 @@ import { useParams } from "react-router-dom";
 export const Profile = () => {
     const { profileId } = useParams()
     const { getProfile, profile } = useContext(ProfileContext)
-    const [userProfile, setUserProfile] = useState({})
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     useEffect(() => {
         getProfile()
         // eslint-disable-next-line
     }, [])
-    useEffect(() => {
-        setUserProfile(profile)
-        // eslint-disable-next-line
-    }, [profile])
     return (
         <div className="profile">
-            <What userProfile={userProfile} />
+            <What profile={profile} />
             <div>
                 <h1>Today</h1>
                 <h4>{new Date().toLocaleDateString("en-US",
@@ -35,10 +30,11 @@ export const Profile = () => {
                         timeZone: "UTC"
                     })}
                 </h4>
-                <h2>{userProfile.priority?.priority} is my priority</h2>
-                <div>because {userProfile.priority?.why}.</div>
+                {console.log(profile)}
+                <h2>{profile.priority?.priority} is my priority</h2>
+                <div>because {profile.priority?.why}.</div>
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
-                {modal && <HistoryForm userProfile={userProfile} toggle={toggle} modal={modal} />}
+                {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
             </div>
         </div>
     )

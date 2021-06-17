@@ -3,13 +3,13 @@ import { ProfileContext } from "../ProfileProvider"
 import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
 import { useParams } from "react-router-dom";
 
-export const What = ({ userProfile }) => {
+export const What = ({ profile }) => {
     const { profileId } = useParams()
     const { getWhat, saveWhat, deleteWhat, whats } = useContext(ProfileContext)
     const [editMode, setEditMode] = useState(false)
     const [what, setWhat] = useState({
         what: "",
-        priority_id: userProfile.priority?.id
+        priority_id: profile.priority?.id
     })
     useEffect(() => {
         getWhat()
@@ -17,10 +17,10 @@ export const What = ({ userProfile }) => {
     }, [])
     useEffect(() => {
         let newWhat = { ...what }
-        newWhat.priority_id = userProfile.priority?.id
+        newWhat.priority_id = profile.priority?.id
         setWhat(newWhat)
         // eslint-disable-next-line
-    }, [userProfile])
+    }, [profile])
     const toggleEditMode = () => setEditMode(!editMode)
     const handleInputChange = (event) => {
         let newWhat = { ...what }
