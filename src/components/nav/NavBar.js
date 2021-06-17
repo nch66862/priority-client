@@ -39,13 +39,13 @@ export const NavBar = () => {
             <Navbar>
                 <NavbarBrand href="/">Priority</NavbarBrand>
                 <NavItem className="navItem">
-                    <NavLink href="/community">Community</NavLink>
+                    <NavLink onClick={() => history.push("/community")}>Community</NavLink>
                 </NavItem>
                 <NavItem className="navItem">
-                    <NavLink href="/leaderboard">Leaderboard</NavLink>
+                    <NavLink onClick={() => history.push("/leaderboard")}>Leaderboard</NavLink>
                 </NavItem>
                 <NavItem className="navItem">
-                    <NavLink href="/subscriptions">Subscriptions</NavLink>
+                    <NavLink onClick={() => history.push("/subscriptions")}>Subscriptions</NavLink>
                 </NavItem>
                 {(localStorage.getItem("priority_user_token") !== null) && (
                     <>

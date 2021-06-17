@@ -18,7 +18,12 @@ export const Community = () => {
                 {users.map(singleUser => {
                     return (
                         <div key={singleUser.id} id={singleUser.id} onClick={handleOpenProfile}>
-                            {/* <ListGroupItem>{singleUser}</ListGroupItem> */}
+                            {/* <ListGroupItem>{singleUser}
+                                <ListGroupItemHeading>List group item heading</ListGroupItemHeading>
+                                <ListGroupItemText>
+                                    Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+                                </ListGroupItemText>
+                            </ListGroupItem> */}
                         </div>
                     )
                 })}
