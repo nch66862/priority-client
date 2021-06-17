@@ -4,7 +4,7 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import { ProfileContext } from "../../profile/ProfileProvider";
 
 export const VisibilityModal = ({ visibilityModal, toggleVisibilityModal }) => {
-    const { changePrivacy, getProfile } = useContext(ProfileContext)
+    const { changePrivacy, getProfile, profile } = useContext(ProfileContext)
     const [privacy, setPrivacy] = useState({
         is_public: false
     });
@@ -16,16 +16,17 @@ export const VisibilityModal = ({ visibilityModal, toggleVisibilityModal }) => {
     }
     useEffect(() => {
         getProfile()
-            .then(res => {
-                setPrivacy(res.priority)
-            })
         // eslint-disable-next-line
     }, [])
+    useEffect(() => {
+        setPrivacy(profile.priority)
+        // eslint-disable-next-line
+    }, [profile])
     return (
         <>
             <Modal isOpen={visibilityModal} toggle={toggleVisibilityModal}>
                 <ModalBody>
-                    <ModalHeader>My Profile: {privacy.is_public ? "Public" : "Private"}</ModalHeader>
+                    <ModalHeader>My Profile: {privacy?.is_public ? "Public" : "Private"}</ModalHeader>
                     <RadioGroup horizontal onChange={handleChangePrivacy}>
                         <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
                         <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>

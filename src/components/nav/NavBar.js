@@ -7,10 +7,9 @@ import { VisibilityModal } from "./privacy/VisibilityModal";
 import { PriorityModal } from "./profile/PriorityModal";
 
 export const NavBar = () => {
-    const { getProfile } = useContext(ProfileContext)
+    const { getProfile, profile } = useContext(ProfileContext)
     const [visibilityModal, setVisibilityModal] = useState(false);
     const [priorityModal, setPriorityModal] = useState(false);
-    const [currentUser, setCurrentUser] = useState({});
     const toggleVisibilityModal = () => setVisibilityModal(!visibilityModal);
     const togglePriorityModal = () => setPriorityModal(!priorityModal);
     const history = useHistory()
@@ -22,9 +21,6 @@ export const NavBar = () => {
     }
     useEffect(() => {
         getProfile()
-            .then(res => {
-                setCurrentUser(res)
-            })
         // eslint-disable-next-line
     }, [])
     return (
@@ -61,7 +57,7 @@ export const NavBar = () => {
                         </UncontrolledDropdown>
                     </>
                 )}
-                <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
+                <NavbarText>Welcome, {profile.user?.user.first_name}</NavbarText>
             </Navbar>
             <VisibilityModal visibilityModal={visibilityModal}  toggleVisibilityModal={toggleVisibilityModal} />
             <PriorityModal priorityModal={priorityModal}  togglePriorityModal={togglePriorityModal} />

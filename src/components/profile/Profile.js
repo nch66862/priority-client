@@ -9,15 +9,18 @@ import { useParams } from "react-router-dom";
 //just a container for a footer for completeness
 export const Profile = () => {
     const { profileId } = useParams()
-    const { getProfile } = useContext(ProfileContext)
+    const { getProfile, profile } = useContext(ProfileContext)
     const [userProfile, setUserProfile] = useState({})
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     useEffect(() => {
         getProfile()
-            .then(response => setUserProfile(response))
         // eslint-disable-next-line
     }, [])
+    useEffect(() => {
+        setUserProfile(profile)
+        // eslint-disable-next-line
+    }, [profile])
     return (
         <div className="profile">
             <What userProfile={userProfile} />
