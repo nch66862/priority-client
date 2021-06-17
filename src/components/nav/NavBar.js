@@ -7,12 +7,14 @@ import { ProfileContext } from "../profile/ProfileProvider";
 
 export const NavBar = () => {
     const { changePrivacy, getProfile } = useContext(ProfileContext)
-    const [modal, setModal] = useState(false);
+    const [visibilityModal, setVisibilityModal] = useState(false);
+    const [priorityModal, setPriorityModal] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const [privacy, setPrivacy] = useState({
         is_public: false
     });
-    const toggle = () => setModal(!modal);
+    const toggleVisibilityModal = () => setVisibilityModal(!visibilityModal);
+    const togglePriorityModal = () => setPriorityModal(!priorityModal);
     const history = useHistory()
     const handleLogout = () => {
         localStorage.removeItem("priority_user_token")
@@ -54,8 +56,11 @@ export const NavBar = () => {
                                 Profile
                             </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem onClick={toggle}>
-                                    Change Visibility
+                                <DropdownItem onClick={toggleVisibilityModal}>
+                                    Change your visibility
+                                </DropdownItem>
+                                <DropdownItem onClick={togglePriorityModal}>
+                                    Change your priority
                                 </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={handleLogout}>
@@ -67,7 +72,7 @@ export const NavBar = () => {
                 )}
                 <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
             </Navbar>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={visibilityModal} toggle={toggleVisibilityModal}>
                 <ModalBody>
                     <ModalHeader>My Profile: {privacy.is_public ? "Public" : "Private"}</ModalHeader>
                     <RadioGroup horizontal onChange={handleChangePrivacy}>
@@ -76,7 +81,7 @@ export const NavBar = () => {
                     </RadioGroup>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="secondary" onClick={toggle}>OK</Button>
+                    <Button color="secondary" onClick={toggleVisibilityModal}>OK</Button>
                 </ModalFooter>
             </Modal>
         </>
