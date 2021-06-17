@@ -4,7 +4,7 @@ import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
 
 export const What = ({ userProfile }) => {
     const { getWhat, saveWhat, deleteWhat, whats } = useContext(ProfileContext)
-    const [showNewWhat, setShowNewWhat] = useState(false)
+    const [editMode, setEditMode] = useState(false)
     const [what, setWhat] = useState({
         what: "",
         priority_id: userProfile.priority?.id
@@ -19,13 +19,9 @@ export const What = ({ userProfile }) => {
         setWhat(newWhat)
         // eslint-disable-next-line
     }, [userProfile])
-    const handleAddWhat = () => {
-        setShowNewWhat(true)
-    }
+    const toggleEditMode = () => setEditMode(!editMode)
     const handleInputChange = (event) => {
         let newWhat = { ...what }
-        console.log(newWhat)
-        console.log(userProfile)
         newWhat.what = event.target.value
         setWhat(newWhat)
     }
@@ -34,32 +30,27 @@ export const What = ({ userProfile }) => {
     }
     const handleSubmitWhat = () => {
         saveWhat(what)
-            .then(() => setShowNewWhat(false))
-    }
-    const handleCloseForm = () => {
-        setShowNewWhat(false)
     }
     return (
         <div>
             <div className="whatHeader">
                 <h3>What will I prioritize?</h3>
-                <Button color="secondary" onClick={handleAddWhat}> + </Button>
+                <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>
             </div>
             <ListGroup>
                 {whats.map(singleWhat => {
                     return (
                         <div key={singleWhat.id} className="whatItem">
                             <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
-                            <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>
+                            {editMode && <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
                         </div>
                     )
                 })}
             </ListGroup>
-            {showNewWhat && (
+            {editMode && (
                 <>
                     <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" />
                     <Button onClick={handleSubmitWhat}>Save</Button>
-                    <Button onClick={handleCloseForm}>Cancel</Button>
                 </>
             )}
         </div>
