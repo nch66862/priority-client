@@ -33,12 +33,14 @@ export const ApplicationViews = () => {
                     setLoggedInUserObj(res)
                 }
             })
+        // eslint-disable-next-line
     }, [])
     useEffect(() => {
         if (loggedInUserObj.valid) {
             setServerIsLoading(false)
             history.push("/")
         }
+        // eslint-disable-next-line
     }, [loggedInUserObj])
     return <>
         <main style={{

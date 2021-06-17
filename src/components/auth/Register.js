@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import "./Register.css"
 
 //This is a form to register a new user to the database
@@ -20,8 +20,6 @@ export const Register = () => {
         what: "",
         how: 5
     })
-    //state variable controls displaying the dialog box if the person registering has an email account that already exists in the database
-    const [conflictDialog, setConflictDialog] = useState(false)
     //modifies the state variable when changes are made to the inputs on the form
     const handleInputChange = (event) => {
         const newUser = { ...registerUser }

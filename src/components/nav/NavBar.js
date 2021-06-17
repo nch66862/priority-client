@@ -23,11 +23,12 @@ export const NavBar = () => {
         changePrivacy({
             is_public: value
         })
-            .then(() => setPrivacy(value))
+            .then(res => setPrivacy(res))
     }
     useEffect(() => {
         getProfile()
-            .then (res => setPrivacy(res.priority.is_public))
+            .then(res => setPrivacy(res.priority))
+        // eslint-disable-next-line
     }, [])
     return (
         <>
@@ -63,16 +64,16 @@ export const NavBar = () => {
                 <NavbarText>Welcome</NavbarText>
             </Navbar>
             <Modal isOpen={modal} toggle={toggle}>
-                    <ModalBody>
-                        <ModalHeader>My Profile</ModalHeader>
-                        <RadioGroup horizontal onChange={handleChangePrivacy}>
-                            <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
-                            <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
-                        </RadioGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={toggle}>OK</Button>
-                    </ModalFooter>
+                <ModalBody>
+                    <ModalHeader>My Profile: {privacy.is_public ? "Public" : "Private"}</ModalHeader>
+                    <RadioGroup horizontal onChange={handleChangePrivacy}>
+                        <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
+                        <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
+                    </RadioGroup>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="secondary" onClick={toggle}>OK</Button>
+                </ModalFooter>
             </Modal>
         </>
     )

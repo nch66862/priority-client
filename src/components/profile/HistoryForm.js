@@ -17,6 +17,7 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
     useEffect(() => {
         getWhat()
             .then(response => setWhat(response))
+        // eslint-disable-next-line
     }, [])
     const formatVisibleDate = (date) => {
         const is_yesterday = isYesterday(date)

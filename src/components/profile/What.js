@@ -11,11 +11,13 @@ export const What = ({ userProfile }) => {
     })
     useEffect(() => {
         getWhat()
+        // eslint-disable-next-line
     }, [])
     useEffect(() => {
         let newWhat = { ...what }
         newWhat.priority_id = userProfile.priority?.id
         setWhat(newWhat)
+        // eslint-disable-next-line
     }, [userProfile])
     const handleAddWhat = () => {
         setShowNewWhat(true)

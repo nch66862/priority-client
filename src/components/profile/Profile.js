@@ -13,10 +13,11 @@ export const Profile = () => {
     useEffect(() => {
         getProfile()
             .then(response => setUserProfile(response))
+        // eslint-disable-next-line
     }, [])
     return (
         <>
-        <What userProfile={userProfile} />
+            <What userProfile={userProfile} />
             <h1>Today</h1>
             <h4>{new Date().toLocaleDateString("en-US",
                 {
