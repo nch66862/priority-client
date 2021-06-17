@@ -1,0 +1,4 @@
+.communityProfileListItem:hover {
+    cursor: pointer;
+    color: lightskyblue;
+}

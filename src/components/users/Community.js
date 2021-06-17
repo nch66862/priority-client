@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import { ListGroup, ListGroupItem, Label, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { UserContext } from "./UserProvider";
+import './Community.css'
 
 export const Community = () => {
     const { getPublicProfiles, profiles } = useContext(UserContext)
@@ -20,11 +21,11 @@ export const Community = () => {
             <ListGroup>
                 {profiles.map(singleProfile => {
                     return (
-                        <div key={singleProfile.id} id={singleProfile.id} onClick={handleOpenProfile}>
+                        <div className="communityProfileListItem" key={singleProfile.id} id={singleProfile.id} onClick={handleOpenProfile}>
                             <ListGroupItem>
-                                <Label id={singleProfile.id}>{singleProfile.priority_user.user.first_name}</Label>
-                                <ListGroupItemHeading id={singleProfile.id}>{singleProfile.priority}</ListGroupItemHeading>
-                                <ListGroupItemText id={singleProfile.id}>{singleProfile.why}</ListGroupItemText>
+                                <Label className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority_user.user.first_name}</Label>
+                                <ListGroupItemHeading className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority}</ListGroupItemHeading>
+                                <ListGroupItemText className="communityProfileListItem" id={singleProfile.id}>{singleProfile.why}</ListGroupItemText>
                             </ListGroupItem>
                         </div>
                     )
