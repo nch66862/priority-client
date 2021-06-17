@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
 import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
+import { useParams } from "react-router-dom";
 
 export const What = ({ userProfile }) => {
+    const { profileId } = useParams()
     const { getWhat, saveWhat, deleteWhat, whats } = useContext(ProfileContext)
     const [editMode, setEditMode] = useState(false)
     const [what, setWhat] = useState({
@@ -35,7 +37,7 @@ export const What = ({ userProfile }) => {
         <div>
             <div className="whatHeader">
                 <h3>What will I prioritize?</h3>
-                <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>
+                {! profileId && <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
             </div>
             <ListGroup>
                 {whats.map(singleWhat => {

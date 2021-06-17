@@ -4,9 +4,11 @@ import { Button } from 'reactstrap';
 import { HistoryForm } from "./HistoryForm";
 import { What } from "./What";
 import './Profile.css'
+import { useParams } from "react-router-dom";
 
 //just a container for a footer for completeness
 export const Profile = () => {
+    const { profileId } = useParams()
     const { getProfile } = useContext(ProfileContext)
     const [userProfile, setUserProfile] = useState({})
     const [modal, setModal] = useState(false);
@@ -32,7 +34,7 @@ export const Profile = () => {
                 </h4>
                 <h2>{userProfile.priority?.priority} is my priority</h2>
                 <div>because {userProfile.priority?.why}.</div>
-                <Button onClick={toggle}>Input Time</Button>
+                {!profileId && <Button onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm userProfile={userProfile} toggle={toggle} modal={modal} />}
             </div>
         </div>

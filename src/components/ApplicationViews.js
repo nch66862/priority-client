@@ -74,6 +74,7 @@ export const ApplicationViews = () => {
                     </Route>
                     <Route exact path="/profiles/:profileId(\d+)">
                         <Protected>
+                            <Profile />
                         </Protected>
                     </Route>
                     <Route exact path="/profile/edit">
