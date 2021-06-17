@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react"
-import { ProfileContext } from "./ProfileProvider"
+import { ProfileContext } from '../ProfileProvider'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Form, FormGroup } from 'reactstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
 import { isYesterday, format } from 'date-fns'
 
 export const HistoryForm = ({ userProfile, toggle, modal }) => {
-    const { getWhat, submitHistory } = useContext(ProfileContext)
-    const [what, setWhat] = useState([])
+    const { getWhat, submitHistory, whats } = useContext(ProfileContext)
     const [historyEvent, setHistoryEvent] = useState({
         what_id: "",
         time_spent: userProfile.priority?.how,
@@ -16,7 +15,6 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
     const [visibleDate, setVisibleDate] = useState("today")
     useEffect(() => {
         getWhat()
-            .then(response => setWhat(response))
         // eslint-disable-next-line
     }, [])
     const formatVisibleDate = (date) => {
@@ -62,7 +60,7 @@ export const HistoryForm = ({ userProfile, toggle, modal }) => {
                 <ModalBody>
                     <ModalHeader>I spent my time...</ModalHeader>
                     <RadioGroup onChange={handleChangeWhat}>
-                        {what.map(singleWhat => {
+                        {whats.map(singleWhat => {
                             return <RadioButton rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
                         })}
                     </RadioGroup>
