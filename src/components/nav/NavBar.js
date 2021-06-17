@@ -1,18 +1,15 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import "./NavBar.css"
-import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Modal, ModalBody, ModalFooter, ModalHeader, Button } from "reactstrap"
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from "reactstrap"
 import { ProfileContext } from "../profile/ProfileProvider";
+import { VisibilityModal } from "./privacy/VisibilityModal";
 
 export const NavBar = () => {
-    const { changePrivacy, getProfile } = useContext(ProfileContext)
+    const { getProfile } = useContext(ProfileContext)
     const [visibilityModal, setVisibilityModal] = useState(false);
     const [priorityModal, setPriorityModal] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
-    const [privacy, setPrivacy] = useState({
-        is_public: false
-    });
     const toggleVisibilityModal = () => setVisibilityModal(!visibilityModal);
     const togglePriorityModal = () => setPriorityModal(!priorityModal);
     const history = useHistory()
@@ -22,16 +19,9 @@ export const NavBar = () => {
         localStorage.removeItem("logged_in_user")
         history.push("/login")
     }
-    const handleChangePrivacy = (value) => {
-        changePrivacy({
-            is_public: value
-        })
-            .then(res => setPrivacy(res))
-    }
     useEffect(() => {
         getProfile()
             .then(res => {
-                setPrivacy(res.priority)
                 setCurrentUser(res)
             })
         // eslint-disable-next-line
@@ -72,18 +62,7 @@ export const NavBar = () => {
                 )}
                 <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
             </Navbar>
-            <Modal isOpen={visibilityModal} toggle={toggleVisibilityModal}>
-                <ModalBody>
-                    <ModalHeader>My Profile: {privacy.is_public ? "Public" : "Private"}</ModalHeader>
-                    <RadioGroup horizontal onChange={handleChangePrivacy}>
-                        <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
-                        <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
-                    </RadioGroup>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="secondary" onClick={toggleVisibilityModal}>OK</Button>
-                </ModalFooter>
-            </Modal>
+            <VisibilityModal visibilityModal={visibilityModal}  toggleVisibilityModal={toggleVisibilityModal} />
         </>
     )
 }
