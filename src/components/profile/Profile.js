@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "./ProfileProvider"
 import { Button } from 'reactstrap';
 import { HistoryForm } from "./HistoryForm";
-import { What } from "./What";
+import { What } from "./what/What";
 import './Profile.css'
 import { useParams } from "react-router-dom";
 
