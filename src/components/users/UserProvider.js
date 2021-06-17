@@ -15,7 +15,7 @@ export const UserProvider = (props) => {
         })
         .then(res => res.json())
 }
-    const getAllUsers = () => {
+    const getPublicProfiles = () => {
         return fetch("http://localhost:8000/users",{
             headers:{
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
@@ -71,7 +71,7 @@ export const UserProvider = (props) => {
 
     return (
         <UserContext.Provider value={{ 
-            getAllUsers, users, getUserById, changeSubscribed, checkSubscribed, 
+            getPublicProfiles, users, getUserById, changeSubscribed, checkSubscribed, 
             checkAuthenticated,
             loggedInUserId, setLoggedInUserId, logUserIn }}>
             {props.children}
