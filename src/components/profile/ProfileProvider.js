@@ -56,8 +56,18 @@ export const ProfileProvider = (props) => {
             body: JSON.stringify(historyEvent)
         })
     }
+    const changePrivacy = (profileIsPublic) => {
+        return fetch("http://localhost:8000/users/change_privacy", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            },
+            body: JSON.stringify(profileIsPublic)
+        })
+    }
     return (
-        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat }}>
+        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy }}>
             {props.children}
         </ProfileContext.Provider>
     )
