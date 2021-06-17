@@ -78,6 +78,7 @@ export const ProfileProvider = (props) => {
             },
             body: JSON.stringify(newPriority)
         })
+        .then (() => getProfile())
     }
     return (
         <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy, updatePriority, profile }}>
