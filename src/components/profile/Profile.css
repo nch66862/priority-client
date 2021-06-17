@@ -1,0 +1,12 @@
+.profile {
+    display: flex;
+}
+
+.whatHeader {
+    display: flex;
+}
+
+.whatItem {
+    display: flex;
+    justify-content: space-between;
+}

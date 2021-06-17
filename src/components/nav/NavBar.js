@@ -8,6 +8,7 @@ import { ProfileContext } from "../profile/ProfileProvider";
 export const NavBar = () => {
     const { changePrivacy, getProfile } = useContext(ProfileContext)
     const [modal, setModal] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
     const [privacy, setPrivacy] = useState({
         is_public: false
     });
@@ -23,28 +24,32 @@ export const NavBar = () => {
         changePrivacy({
             is_public: value
         })
-            .then(() => setPrivacy(value))
+            .then(res => setPrivacy(res))
     }
     useEffect(() => {
         getProfile()
-            .then (res => setPrivacy(res.priority.is_public))
+            .then(res => {
+                setPrivacy(res.priority)
+                setCurrentUser(res)
+            })
+        // eslint-disable-next-line
     }, [])
     return (
         <>
             <Navbar>
                 <NavbarBrand href="/">Priority</NavbarBrand>
-                <NavItem>
-                    <NavLink href="/community">Community</NavLink>
+                <NavItem className="navItem">
+                    <NavLink onClick={() => history.push("/community")}>Community</NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink href="/leaderboard">Leaderboard</NavLink>
+                <NavItem className="navItem">
+                    <NavLink onClick={() => history.push("/leaderboard")}>Leaderboard</NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink href="/subscriptions">Subscriptions</NavLink>
+                <NavItem className="navItem">
+                    <NavLink onClick={() => history.push("/subscriptions")}>Subscriptions</NavLink>
                 </NavItem>
                 {(localStorage.getItem("priority_user_token") !== null) && (
                     <>
-                        <UncontrolledDropdown nav inNavbar>
+                        <UncontrolledDropdown nav inNavbar className="navItem">
                             <DropdownToggle nav caret>
                                 Profile
                             </DropdownToggle>
@@ -60,19 +65,19 @@ export const NavBar = () => {
                         </UncontrolledDropdown>
                     </>
                 )}
-                <NavbarText>Welcome</NavbarText>
+                <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
             </Navbar>
             <Modal isOpen={modal} toggle={toggle}>
-                    <ModalBody>
-                        <ModalHeader>My Profile</ModalHeader>
-                        <RadioGroup horizontal onChange={handleChangePrivacy}>
-                            <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
-                            <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
-                        </RadioGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={toggle}>OK</Button>
-                    </ModalFooter>
+                <ModalBody>
+                    <ModalHeader>My Profile: {privacy.is_public ? "Public" : "Private"}</ModalHeader>
+                    <RadioGroup horizontal onChange={handleChangePrivacy}>
+                        <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
+                        <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
+                    </RadioGroup>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="secondary" onClick={toggle}>OK</Button>
+                </ModalFooter>
             </Modal>
         </>
     )

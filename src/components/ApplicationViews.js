@@ -5,6 +5,7 @@ import { Protected } from "./auth/Protected"
 import { Loading } from "./nav/Loading"
 import { Profile } from "./profile/Profile"
 import { ProfileProvider } from "./profile/ProfileProvider"
+import { Community } from "./users/Community"
 
 export const ApplicationViews = () => {
     const { logUserIn } = useContext(UserContext)
@@ -33,12 +34,14 @@ export const ApplicationViews = () => {
                     setLoggedInUserObj(res)
                 }
             })
+        // eslint-disable-next-line
     }, [])
     useEffect(() => {
         if (loggedInUserObj.valid) {
             setServerIsLoading(false)
             history.push("/")
         }
+        // eslint-disable-next-line
     }, [loggedInUserObj])
     return <>
         <main style={{
@@ -54,6 +57,7 @@ export const ApplicationViews = () => {
                     </Route>
                     <Route exact path="/community">
                         <Protected>
+                            <Community />
                         </Protected>
                     </Route>
                     <Route exact path="/leaderboard">
@@ -68,8 +72,9 @@ export const ApplicationViews = () => {
                         <Protected>
                         </Protected>
                     </Route>
-                    <Route exact path="/what/edit/:whatId(\d+)">
+                    <Route exact path="/profiles/:profileId(\d+)">
                         <Protected>
+                            <Profile />
                         </Protected>
                     </Route>
                     <Route exact path="/profile/edit">

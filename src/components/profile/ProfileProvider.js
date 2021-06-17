@@ -65,6 +65,7 @@ export const ProfileProvider = (props) => {
             },
             body: JSON.stringify(profileIsPublic)
         })
+        .then(res => res.json())
     }
     return (
         <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy }}>
