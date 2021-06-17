@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Modal, ModalBody, ModalFooter, ModalHeader, Button, Input, Form, FormGroup } from "reactstrap"
+import { Modal, ModalBody, ModalFooter, Button, Input, Form, FormGroup } from "reactstrap"
 import { ProfileContext } from "../../profile/ProfileProvider";
 
 export const PriorityModal = ({ priorityModal, togglePriorityModal }) => {
@@ -17,7 +17,7 @@ export const PriorityModal = ({ priorityModal, togglePriorityModal }) => {
     const handleSubmitEdit = (event) => {
         event.preventDefault()
         updatePriority(editedPriority)
-        .then(() => togglePriorityModal())
+            .then(() => togglePriorityModal())
     }
     useEffect(() => {
         getProfile()

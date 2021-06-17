@@ -67,8 +67,18 @@ export const ProfileProvider = (props) => {
         })
         .then(res => res.json())
     }
+    const updatePriority = (newPriority) => {
+        return fetch(`http://localhost:8000/priority/${newPriority.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            },
+            body: JSON.stringify(newPriority)
+        })
+    }
     return (
-        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy }}>
+        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy, updatePriority }}>
             {props.children}
         </ProfileContext.Provider>
     )
