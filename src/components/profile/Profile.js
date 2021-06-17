@@ -16,6 +16,10 @@ export const Profile = () => {
         getProfile()
         // eslint-disable-next-line
     }, [])
+    useEffect(() => {
+        console.log("it changed")
+        // eslint-disable-next-line
+    }, [profile])
     return (
         <div className="profile">
             <What profile={profile} />
