@@ -50,6 +50,7 @@ export const UserProvider = (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             },
             body: JSON.stringify(subscription)
         })
