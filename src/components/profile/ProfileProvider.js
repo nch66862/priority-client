@@ -1,9 +1,10 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const ProfileContext = createContext()
 
 export const ProfileProvider = (props) => {
     const [whats, setWhats] = useState([])
+    const [profile, setProfile] = useState({})
     const getProfile = () => {
         return fetch("http://localhost:8000/users/my_profile", {
             method: "GET",
@@ -13,6 +14,7 @@ export const ProfileProvider = (props) => {
             }
         })
             .then(res => res.json())
+            .then(res => setProfile(res))
     }
     const getWhat = () => {
         return fetch("http://localhost:8000/what", {
@@ -67,8 +69,19 @@ export const ProfileProvider = (props) => {
         })
         .then(res => res.json())
     }
+    const updatePriority = (newPriority) => {
+        return fetch(`http://localhost:8000/priority/${newPriority.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            },
+            body: JSON.stringify(newPriority)
+        })
+        .then (() => getProfile())
+    }
     return (
-        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy }}>
+        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy, updatePriority, profile }}>
             {props.children}
         </ProfileContext.Provider>
     )

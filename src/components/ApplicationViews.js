@@ -48,44 +48,40 @@ export const ApplicationViews = () => {
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
         }}>
-            <UserProvider>
-                <ProfileProvider>
-                    <Route exact path="/">
-                        <Protected>
-                            <Profile />
-                        </Protected>
-                    </Route>
-                    <Route exact path="/community">
-                        <Protected>
-                            <Community />
-                        </Protected>
-                    </Route>
-                    <Route exact path="/leaderboard">
-                        <Protected>
-                        </Protected>
-                    </Route>
-                    <Route exact path="/subscriptions">
-                        <Protected>
-                        </Protected>
-                    </Route>
-                    <Route exact path="/priority/edit">
-                        <Protected>
-                        </Protected>
-                    </Route>
-                    <Route exact path="/profiles/:profileId(\d+)">
-                        <Protected>
-                            <Profile />
-                        </Protected>
-                    </Route>
-                    <Route exact path="/profile/edit">
-                        <Protected>
-                        </Protected>
-                    </Route>
-                    <Route exact path="/loading">
-                        {serverIsLoading && <Loading />}
-                    </Route>
-                </ProfileProvider>
-            </UserProvider>
+            <Route exact path="/">
+                <Protected>
+                    <Profile />
+                </Protected>
+            </Route>
+            <Route exact path="/community">
+                <Protected>
+                    <Community />
+                </Protected>
+            </Route>
+            <Route exact path="/leaderboard">
+                <Protected>
+                </Protected>
+            </Route>
+            <Route exact path="/subscriptions">
+                <Protected>
+                </Protected>
+            </Route>
+            <Route exact path="/priority/edit">
+                <Protected>
+                </Protected>
+            </Route>
+            <Route exact path="/profiles/:profileId(\d+)">
+                <Protected>
+                    <Profile />
+                </Protected>
+            </Route>
+            <Route exact path="/profile/edit">
+                <Protected>
+                </Protected>
+            </Route>
+            <Route exact path="/loading">
+                {serverIsLoading && <Loading />}
+            </Route>
         </main>
     </>
 }

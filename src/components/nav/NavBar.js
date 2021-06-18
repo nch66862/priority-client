@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import "./NavBar.css"
-import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Modal, ModalBody, ModalFooter, ModalHeader, Button } from "reactstrap"
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from "reactstrap"
 import { ProfileContext } from "../profile/ProfileProvider";
+import { VisibilityModal } from "./privacy/VisibilityModal";
+import { PriorityModal } from "./profile/PriorityModal";
 
 export const NavBar = () => {
-    const { changePrivacy, getProfile } = useContext(ProfileContext)
-    const [modal, setModal] = useState(false);
-    const [currentUser, setCurrentUser] = useState({});
-    const [privacy, setPrivacy] = useState({
-        is_public: false
-    });
-    const toggle = () => setModal(!modal);
+    const { getProfile, profile } = useContext(ProfileContext)
+    const [visibilityModal, setVisibilityModal] = useState(false);
+    const [priorityModal, setPriorityModal] = useState(false);
+    const toggleVisibilityModal = () => setVisibilityModal(!visibilityModal);
+    const togglePriorityModal = () => setPriorityModal(!priorityModal);
     const history = useHistory()
     const handleLogout = () => {
         localStorage.removeItem("priority_user_token")
@@ -20,18 +19,8 @@ export const NavBar = () => {
         localStorage.removeItem("logged_in_user")
         history.push("/login")
     }
-    const handleChangePrivacy = (value) => {
-        changePrivacy({
-            is_public: value
-        })
-            .then(res => setPrivacy(res))
-    }
     useEffect(() => {
         getProfile()
-            .then(res => {
-                setPrivacy(res.priority)
-                setCurrentUser(res)
-            })
         // eslint-disable-next-line
     }, [])
     return (
@@ -54,8 +43,11 @@ export const NavBar = () => {
                                 Profile
                             </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem onClick={toggle}>
-                                    Change Visibility
+                                <DropdownItem onClick={toggleVisibilityModal}>
+                                    Change your visibility
+                                </DropdownItem>
+                                <DropdownItem onClick={togglePriorityModal}>
+                                    Change your priority
                                 </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={handleLogout}>
@@ -65,20 +57,10 @@ export const NavBar = () => {
                         </UncontrolledDropdown>
                     </>
                 )}
-                <NavbarText>Welcome, {currentUser.user?.user.first_name}</NavbarText>
+                <NavbarText>Welcome, {profile.user?.user.first_name}</NavbarText>
             </Navbar>
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalBody>
-                    <ModalHeader>My Profile: {privacy.is_public ? "Public" : "Private"}</ModalHeader>
-                    <RadioGroup horizontal onChange={handleChangePrivacy}>
-                        <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
-                        <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
-                    </RadioGroup>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="secondary" onClick={toggle}>OK</Button>
-                </ModalFooter>
-            </Modal>
+            <VisibilityModal visibilityModal={visibilityModal}  toggleVisibilityModal={toggleVisibilityModal} />
+            <PriorityModal priorityModal={priorityModal}  togglePriorityModal={togglePriorityModal} />
         </>
     )
 }
