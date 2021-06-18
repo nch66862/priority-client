@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Route, useHistory } from "react-router-dom"
-import { UserContext, UserProvider } from "./users/UserProvider"
+import { UserContext } from "./users/UserProvider"
 import { Protected } from "./auth/Protected"
 import { Loading } from "./nav/Loading"
 import { Profile } from "./profile/Profile"
-import { ProfileProvider } from "./profile/ProfileProvider"
 import { Community } from "./users/Community"
 
 export const ApplicationViews = () => {

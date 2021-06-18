@@ -5,6 +5,7 @@ import { HistoryForm } from "./history/HistoryForm";
 import { What } from "./what/What";
 import './Profile.css'
 import { useParams } from "react-router-dom";
+import { AffirmationList } from './affirmation/AffirmationList'
 
 //just a container for a footer for completeness
 export const Profile = () => {
