@@ -19,7 +19,7 @@ export const AffirmationList = ({ profile }) => {
     return (
         <div>
             <h3>Affirmations</h3>
-            {profile.priority?.is_public ? (
+            {profile.priority?.is_public || profileId ? (
                 <>
                     <ListGroup>
                         {affirmations.length ? affirmations.map(affirmation => {
@@ -31,7 +31,7 @@ export const AffirmationList = ({ profile }) => {
                             )
                         }) : <div>No affirmations yet</div>}
                     </ListGroup>
-                    {!profileId && <AffirmationForm profile={profile} />}
+                    {profileId && <AffirmationForm profile={profile} />}
                 </>
                 )
                 :
