@@ -20,14 +20,14 @@ export const AffirmationList = ({ profile }) => {
         <div>
             <h3>Affirmations</h3>
             <ListGroup>
-                {affirmations.map(affirmation => {
+                {affirmations.length ? affirmations.map(affirmation => {
                     return (
                         <div key={affirmation.id} className="whatItem">
                             <ListGroupItem key={affirmation.id} >{affirmation.what}</ListGroupItem>
                             {<Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
                         </div>
                     )
-                })}
+                }): <div>No affirmations yet</div>}
             </ListGroup>
             {!profileId && <AffirmationForm profile={profile} />}
         </div>
