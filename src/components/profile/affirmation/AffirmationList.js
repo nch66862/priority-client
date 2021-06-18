@@ -23,7 +23,7 @@ export const AffirmationList = ({ profile }) => {
                 {affirmations.length ? affirmations.map(affirmation => {
                     return (
                         <div key={affirmation.id} className="whatItem">
-                            <ListGroupItem key={affirmation.id} >{affirmation.what}</ListGroupItem>
+                            <ListGroupItem key={affirmation.id} >{affirmation.affirmation}</ListGroupItem>
                             {<Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
                         </div>
                     )
