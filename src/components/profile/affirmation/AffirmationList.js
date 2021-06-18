@@ -1,64 +1,35 @@
-import React, { useContext, useEffect, useState } from "react"
-import { ProfileContext } from "../ProfileProvider"
-import { Button, ListGroup, ListGroupItem, Input } from 'reactstrap';
+import React, { useContext, useEffect } from "react"
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 import { useParams } from "react-router-dom";
+import { AffirmationContext } from "./AffirmationProvider";
+import { AffirmationForm } from "./AffirmationForm";
 
 export const AffirmationList = ({ profile }) => {
     const { profileId } = useParams()
-    const { getWhat, saveWhat, deleteWhat, whats } = useContext(ProfileContext)
-    const [editMode, setEditMode] = useState(false)
-    const [what, setWhat] = useState({
-        what: "",
-        priority_id: profile.priority?.id
-    })
+    const { getAffirmations, deleteAffirmation, affirmations } = useContext(AffirmationContext)
     useEffect(() => {
-        getWhat()
-        // eslint-disable-next-line
-    }, [])
-    useEffect(() => {
-        let newWhat = { ...what }
-        newWhat.priority_id = profile.priority?.id
-        setWhat(newWhat)
+        if (profile.priority) {
+            getAffirmations(profile.priority.id)
+        }
         // eslint-disable-next-line
     }, [profile])
-    const toggleEditMode = () => setEditMode(!editMode)
-    const handleInputChange = (event) => {
-        let newWhat = { ...what }
-        newWhat.what = event.target.value
-        setWhat(newWhat)
-    }
-    const handleDeleteWhat = (event) => {
-        deleteWhat(event.target.id)
-    }
-    const handleSubmitWhat = () => {
-        saveWhat(what)
-            .then(() => setWhat({
-                what: "",
-                priority_id: profile.priority?.id
-            }))
+    const handleDeleteAffirmation = (event) => {
+        deleteAffirmation(event.target.id)
     }
     return (
         <div>
-            <div className="whatHeader">
-                <h3>What will I prioritize?</h3>
-                {!profileId && <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
-            </div>
+            <h3>Affirmations</h3>
             <ListGroup>
-                {whats.map(singleWhat => {
+                {affirmations.map(affirmation => {
                     return (
-                        <div key={singleWhat.id} className="whatItem">
-                            <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
-                            {editMode && <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
+                        <div key={affirmation.id} className="whatItem">
+                            <ListGroupItem key={affirmation.id} >{affirmation.what}</ListGroupItem>
+                            {<Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
                         </div>
                     )
                 })}
             </ListGroup>
-            {editMode && (
-                <>
-                    <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" />
-                    <Button onClick={handleSubmitWhat}>Save</Button>
-                </>
-            )}
+            {profileId && <AffirmationForm profile={profile} />}
         </div>
     )
 }
