@@ -24,7 +24,7 @@ export const AffirmationList = ({ profile }) => {
                     return (
                         <div key={affirmation.id} className="whatItem">
                             <ListGroupItem key={affirmation.id} >{affirmation.affirmation}</ListGroupItem>
-                            {<Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
+                            {affirmation.is_author && <Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
                         </div>
                     )
                 }): <div>No affirmations yet</div>}
