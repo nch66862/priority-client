@@ -5,15 +5,22 @@ import { HistoryForm } from "./history/HistoryForm";
 import { What } from "./what/What";
 import './Profile.css'
 import { useParams } from "react-router-dom";
+import { AffirmationList } from './affirmation/AffirmationList'
+import { UserContext } from "../users/UserProvider";
 
 //just a container for a footer for completeness
 export const Profile = () => {
     const { profileId } = useParams()
     const { getProfile, profile } = useContext(ProfileContext)
+    const { getProfileById, publicProfile } = useContext(UserContext)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     useEffect(() => {
-        getProfile()
+        if (profileId){
+            getProfileById(profileId)
+        } else {
+            getProfile()
+        }
         // eslint-disable-next-line
     }, [])
     return (
@@ -30,11 +37,12 @@ export const Profile = () => {
                         timeZone: "UTC"
                     })}
                 </h4>
-                <h2>{profile.priority?.priority} is my priority</h2>
-                <div>because {profile.priority?.why}.</div>
+                <h2>{profileId ? publicProfile.priority?.priority : profile.priority?.priority} is {profileId ? `${publicProfile.user?.user.first_name}'s` : "my"} priority</h2>
+                <div>because {profileId ? `${publicProfile.priority?.why}` : `I ${profile.priority?.why}`} .</div>
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
             </div>
+            <AffirmationList profileId={profileId} profile={profile} />
         </div>
     )
 }

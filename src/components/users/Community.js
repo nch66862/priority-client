@@ -12,7 +12,6 @@ export const Community = () => {
         // eslint-disable-next-line
     }, [])
     const handleOpenProfile = (event) => {
-        debugger
         history.push(`/profiles/${event.target.id}`
     )}
     return (

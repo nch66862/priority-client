@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Route, useHistory } from "react-router-dom"
-import { UserContext, UserProvider } from "./users/UserProvider"
+import { UserContext } from "./users/UserProvider"
 import { Protected } from "./auth/Protected"
 import { Loading } from "./nav/Loading"
 import { Profile } from "./profile/Profile"
-import { ProfileProvider } from "./profile/ProfileProvider"
 import { Community } from "./users/Community"
+import { AffirmationProvider } from "./profile/affirmation/AffirmationProvider"
 
 export const ApplicationViews = () => {
     const { logUserIn } = useContext(UserContext)
@@ -48,40 +48,38 @@ export const ApplicationViews = () => {
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
         }}>
-            <Route exact path="/">
-                <Protected>
-                    <Profile />
-                </Protected>
-            </Route>
-            <Route exact path="/community">
-                <Protected>
-                    <Community />
-                </Protected>
-            </Route>
-            <Route exact path="/leaderboard">
-                <Protected>
-                </Protected>
-            </Route>
-            <Route exact path="/subscriptions">
-                <Protected>
-                </Protected>
-            </Route>
-            <Route exact path="/priority/edit">
-                <Protected>
-                </Protected>
-            </Route>
-            <Route exact path="/profiles/:profileId(\d+)">
-                <Protected>
-                    <Profile />
-                </Protected>
-            </Route>
-            <Route exact path="/profile/edit">
-                <Protected>
-                </Protected>
-            </Route>
-            <Route exact path="/loading">
-                {serverIsLoading && <Loading />}
-            </Route>
+            <AffirmationProvider>
+                <Route exact path="/">
+                    <Protected>
+                        <Profile />
+                    </Protected>
+                </Route>
+                <Route exact path="/community">
+                    <Protected>
+                        <Community />
+                    </Protected>
+                </Route>
+                <Route exact path="/leaderboard">
+                    <Protected>
+                    </Protected>
+                </Route>
+                <Route exact path="/subscriptions">
+                    <Protected>
+                    </Protected>
+                </Route>
+                <Route exact path="/profiles/:profileId(\d+)">
+                    <Protected>
+                        <Profile />
+                    </Protected>
+                </Route>
+                <Route exact path="/profile/edit">
+                    <Protected>
+                    </Protected>
+                </Route>
+                <Route exact path="/loading">
+                    {serverIsLoading && <Loading />}
+                </Route>
+            </AffirmationProvider>
         </main>
     </>
 }
