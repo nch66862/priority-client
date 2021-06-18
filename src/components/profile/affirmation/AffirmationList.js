@@ -29,7 +29,7 @@ export const AffirmationList = ({ profile }) => {
                     )
                 })}
             </ListGroup>
-            {profileId && <AffirmationForm profile={profile} />}
+            {!profileId && <AffirmationForm profile={profile} />}
         </div>
     )
 }
