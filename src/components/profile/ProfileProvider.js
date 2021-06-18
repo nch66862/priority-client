@@ -68,6 +68,7 @@ export const ProfileProvider = (props) => {
             body: JSON.stringify(profileIsPublic)
         })
         .then(res => res.json())
+        .then(() => getProfile())
     }
     const updatePriority = (newPriority) => {
         return fetch(`http://localhost:8000/priority/${newPriority.id}`, {
