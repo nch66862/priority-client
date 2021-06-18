@@ -1,17 +1,14 @@
-import React, { useContext, useEffect } from "react"
-import { useHistory } from "react-router-dom";
-import { ListGroup, ListGroupItem, Label, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
-import { UserContext } from "./UserProvider";
-import './Community.css'
+import React, { useContext } from "react"
+import { Button } from 'reactstrap';
+import { UserContext } from "../UserProvider";
 
 export const SubscribeButton = (singleProfile={singleProfile}) => {
-    const { getPublicProfiles, profiles } = useContext(UserContext)
-    useEffect(() => {
-        getPublicProfiles()
-        // eslint-disable-next-line
-    }, [])
+    const { changeSubscription } = useContext(UserContext)
     const toggleSubscription = () => {
-        
+        changeSubscription({
+            creator_id: singleProfile.priority_user.id,
+            subscribed: !singleProfile.priority_user.subscribed
+        })
     }
     return (
         <Button onClick={toggleSubscription} disabled={singleProfile.priority_user.subscribed}>{singleProfile.priority_user.subscribed ? "Subscribed" : "+ Subscribe"}</Button>

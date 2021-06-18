@@ -21,8 +21,8 @@ export const UserProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
-            .then(res => res.json())
-            .then(setProfiles)
+        .then(res => res.json())
+        .then(setProfiles)
     }
     const getProfileById = (profileId) => {
         return fetch(`http://localhost:8000/users/${profileId}`, {
@@ -30,8 +30,8 @@ export const UserProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
-            .then(res => res.json())
-            .then(res => setPublicProfile(res))
+        .then(res => res.json())
+        .then(res => setPublicProfile(res))
     }
     const checkAuthenticated = () => {
         return fetch(`http://localhost:8000/check-active`, {
@@ -40,10 +40,20 @@ export const UserProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
-            .then(res => res.json())
-            .then(res => {
-                return res
-            })
+        .then(res => res.json())
+        .then(res => {
+            return res
+        })
+    }
+    const changeSubscription = (subscription) => {
+        return fetch("http://localhost:8000/subscriptions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(subscription)
+        })
+            .then(() => getPublicProfiles())
     }
 
     return (
@@ -51,7 +61,7 @@ export const UserProvider = (props) => {
             getPublicProfiles, profiles,
             checkAuthenticated,
             logUserIn, getProfileById,
-            publicProfile
+            publicProfile, changeSubscription
         }}>
             {props.children}
         </UserContext.Provider>

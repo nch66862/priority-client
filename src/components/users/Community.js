@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom";
-import { ListGroup, ListGroupItem, Label, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
+import { ListGroup, ListGroupItem, Label, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { UserContext } from "./UserProvider";
 import './Community.css'
+import { SubscribeButton } from "./subscriptions/SubscribeButton";
 
 export const Community = () => {
     const { getPublicProfiles, profiles } = useContext(UserContext)
@@ -29,7 +30,7 @@ export const Community = () => {
                                         <ListGroupItemHeading className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority}</ListGroupItemHeading>
                                         <ListGroupItemText className="communityProfileListItem" id={singleProfile.id}>{singleProfile.why}</ListGroupItemText>
                                     </div>
-                                    <Button disabled={singleProfile.priority_user.subscribed}>{singleProfile.priority_user.subscribed ? "Subscribed" : "+ Subscribe"}</Button>
+                                    <SubscribeButton singleProfile={singleProfile}/>
                                 </div>
                             </ListGroupItem>
                         </div>
