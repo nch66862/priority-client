@@ -3,7 +3,7 @@ import { useHistory } from "react-router"
 import { UserContext } from "../users/UserProvider"
 
 export const Protected = (props) => {
-    const { checkAuthenticated, setLoggedInUserId } = useContext(UserContext)
+    const { checkAuthenticated } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const history = useHistory()
     useEffect(() => {
@@ -16,7 +16,6 @@ export const Protected = (props) => {
                     else {
                         localStorage.setItem("priority_user_admin", "false")
                     }
-                    setLoggedInUserId(res.logged_in_user_id)
                     setIsLoading(false)
                 } else {
                     localStorage.removeItem("priority_user_token")
