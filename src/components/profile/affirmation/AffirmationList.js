@@ -14,7 +14,7 @@ export const AffirmationList = ({ profile }) => {
         // eslint-disable-next-line
     }, [profile])
     const handleDeleteAffirmation = (event) => {
-        deleteAffirmation(event.target.id)
+        deleteAffirmation(event.target.id, profile.priority.id)
     }
     return (
         <div>
