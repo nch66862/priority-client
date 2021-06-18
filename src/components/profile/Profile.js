@@ -34,6 +34,7 @@ export const Profile = () => {
                 <div>because {profile.priority?.why}.</div>
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
+                <AffirmationList profileId={profileId} profile={profile} />
             </div>
         </div>
     )
