@@ -25,7 +25,10 @@ export const AffirmationList = ({ profile }) => {
                         {affirmations.length ? affirmations.map(affirmation => {
                             return (
                                 <div key={affirmation.id} className="whatItem">
-                                    <ListGroupItem key={affirmation.id} >{affirmation.affirmation}</ListGroupItem>
+                                    <ListGroupItem key={affirmation.id} >
+                                        <div>{affirmation.affirmation}</div>
+                                        <div>-{affirmation.priority_user.user.first_name}</div>
+                                    </ListGroupItem>
                                     {affirmation.is_author && <Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
                                 </div>
                             )
@@ -33,7 +36,7 @@ export const AffirmationList = ({ profile }) => {
                     </ListGroup>
                     {profileId && <AffirmationForm profile={profile} />}
                 </>
-                )
+            )
                 :
                 <div>Change your profile to public to view affirmations</div>
             }
