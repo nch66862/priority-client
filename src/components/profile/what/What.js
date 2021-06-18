@@ -32,6 +32,10 @@ export const What = ({ profile }) => {
     }
     const handleSubmitWhat = () => {
         saveWhat(what)
+            .then(() => setWhat({
+                what: "",
+                priority_id: profile.priority?.id
+            }))
     }
     return (
         <div>

@@ -16,10 +16,6 @@ export const Profile = () => {
         getProfile()
         // eslint-disable-next-line
     }, [])
-    useEffect(() => {
-        console.log("it changed")
-        // eslint-disable-next-line
-    }, [profile])
     return (
         <div className="profile">
             <What profile={profile} />
@@ -34,7 +30,6 @@ export const Profile = () => {
                         timeZone: "UTC"
                     })}
                 </h4>
-                {console.log(profile)}
                 <h2>{profile.priority?.priority} is my priority</h2>
                 <div>because {profile.priority?.why}.</div>
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
