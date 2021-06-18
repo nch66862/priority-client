@@ -37,8 +37,8 @@ export const Profile = () => {
                         timeZone: "UTC"
                     })}
                 </h4>
-                <h2>{profileId ? publicProfile.priority?.priority : profile.priority?.priority} is {profileId ? `${publicProfile.user?.user}'s` : "my"} priority</h2>
-                <div>because {profileId ? `${publicProfile.user?.user} ${publicProfile.priority?.why}` : `I ${profile.priority?.why}`} .</div>
+                <h2>{profileId ? publicProfile.priority?.priority : profile.priority?.priority} is {profileId ? `${publicProfile.user?.user.first_name}'s` : "my"} priority</h2>
+                <div>because {profileId ? `${publicProfile.priority?.why}` : `I ${profile.priority?.why}`} .</div>
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
             </div>
