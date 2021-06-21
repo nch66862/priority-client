@@ -11,7 +11,7 @@ export const SubscribeButton = ({ singleProfile }) => {
         })
     }
     return (
-        <Button onClick={toggleSubscription}>{singleProfile.priority_user?.subscribed ? "Subscribed" : "+ Subscribe"}</Button>
+        <Button onClick={toggleSubscription}>{singleProfile.priority_user?.subscribed ? "- Unsubscribe" : "+ Subscribe"}</Button>
         // <Button onClick={toggleSubscription} disabled={singleProfile.priority_user?.subscribed}>{singleProfile.priority_user?.subscribed ? "Subscribed" : "+ Subscribe"}</Button>
     )
 }

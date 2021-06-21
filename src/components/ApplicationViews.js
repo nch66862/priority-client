@@ -6,6 +6,7 @@ import { Loading } from "./nav/Loading"
 import { Profile } from "./profile/Profile"
 import { Community } from "./users/Community"
 import { AffirmationProvider } from "./profile/affirmation/AffirmationProvider"
+import { SubscriptionList } from "./users/SubscriptionList"
 
 export const ApplicationViews = () => {
     const { logUserIn } = useContext(UserContext)
@@ -65,6 +66,7 @@ export const ApplicationViews = () => {
                 </Route>
                 <Route exact path="/subscriptions">
                     <Protected>
+                        <SubscriptionList />
                     </Protected>
                 </Route>
                 <Route exact path="/profiles/:profileId(\d+)">
