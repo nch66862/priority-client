@@ -2,20 +2,20 @@ import React, { useContext, useEffect, useState } from "react"
 import { Button, Input } from 'reactstrap';
 import { AffirmationContext } from "./AffirmationProvider";
 
-export const AffirmationForm = ({ profile }) => {
+export const AffirmationForm = ({ publicProfile }) => {
     const { createAffirmation } = useContext(AffirmationContext)
     const [affirmation, setAffirmation] = useState({
         affirmation: "",
-        priority_id: profile.priority?.id
+        priority_id: publicProfile.priority?.id
     })
     useEffect(() => {
-        if (profile.priority) {
+        if (publicProfile.priority) {
             let newAffirmation = { ...affirmation }
-            newAffirmation.priority_id = profile.priority.id
+            newAffirmation.priority_id = publicProfile.priority.id
             setAffirmation(newAffirmation)
         }
         // eslint-disable-next-line
-    }, [profile])
+    }, [publicProfile])
     const handleInputChange = (event) => {
         let newAffirmation = { ...affirmation }
         newAffirmation.affirmation = event.target.value
@@ -25,7 +25,7 @@ export const AffirmationForm = ({ profile }) => {
         createAffirmation(affirmation)
             .then(() => setAffirmation({
                 affirmation: "",
-                priority_id: profile.priority?.id
+                priority_id: publicProfile.priority?.id
             }))
     }
     return (
