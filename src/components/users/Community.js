@@ -22,13 +22,13 @@ export const Community = () => {
             <ListGroup>
                 {profiles.map(singleProfile => {
                     return (
-                        <div className="communityProfileListItem" key={singleProfile.id} id={singleProfile.id} onClick={handleOpenProfile}>
+                        <div className="communityProfileListItem" key={singleProfile.id} id={singleProfile.id}>
                             <ListGroupItem>
                                 <div className="flexSubscribeButton">
                                     <div>
-                                        <Label className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority_user.user.first_name}</Label>
-                                        <ListGroupItemHeading className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority}</ListGroupItemHeading>
-                                        <ListGroupItemText className="communityProfileListItem" id={singleProfile.id}>{singleProfile.why}</ListGroupItemText>
+                                        <Label onClick={handleOpenProfile} className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority_user.user.first_name}</Label>
+                                        <ListGroupItemHeading onClick={handleOpenProfile} className="communityProfileListItem" id={singleProfile.id}>{singleProfile.priority}</ListGroupItemHeading>
+                                        <ListGroupItemText onClick={handleOpenProfile} className="communityProfileListItem" id={singleProfile.id}>{singleProfile.why}</ListGroupItemText>
                                     </div>
                                     <SubscribeButton singleProfile={singleProfile}/>
                                 </div>
