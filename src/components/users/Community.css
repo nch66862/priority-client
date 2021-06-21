@@ -2,3 +2,7 @@
     cursor: pointer;
     color: lightskyblue;
 }
+
+.flexSubscribeButton {
+    display: flex;
+}

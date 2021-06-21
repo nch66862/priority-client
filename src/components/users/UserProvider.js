@@ -6,56 +6,32 @@ export const UserProvider = (props) => {
     const [profiles, setProfiles] = useState([])
     const [publicProfile, setPublicProfile] = useState({})
     const logUserIn = (credentials) => {
-        return fetch("http://localhost:8000/login",{
+        return fetch("http://localhost:8000/login", {
             method: "POST",
-            headers:{
-                "Content-Type":"application/json",
+            headers: {
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(credentials)
         })
-        .then(res => res.json())
-}
+            .then(res => res.json())
+    }
     const getPublicProfiles = () => {
-        return fetch("http://localhost:8000/users",{
-            headers:{
+        return fetch("http://localhost:8000/users", {
+            headers: {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
         .then(setProfiles)
     }
-    const getProfileById = (profileId) =>{
-        return fetch(`http://localhost:8000/users/${profileId}`,{
-            headers:{
+    const getProfileById = (profileId) => {
+        return fetch(`http://localhost:8000/users/${profileId}`, {
+            headers: {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
         .then(res => res.json())
         .then(res => setPublicProfile(res))
-    }
-    const checkSubscribed = (authorId) => {
-        return fetch("http://localhost:8000/users/subscription_status", {
-            method: "POST",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
-            },
-            body: JSON.stringify({
-                "author_id": authorId
-            })
-        })
-            .then(res => res.json())
-    }
-    const changeSubscribed = (subscribing, subscription) => {
-        return fetch("http://localhost:8000/users/subscription",{
-            method: subscribing ? "POST" : "DELETE",
-            // method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
-            },
-            body: JSON.stringify(subscription)
-        })
     }
     const checkAuthenticated = () => {
         return fetch(`http://localhost:8000/check-active`, {
@@ -64,18 +40,30 @@ export const UserProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
         })
-            .then(res => res.json())
-            .then(res => {
-                return res
-            })
+        .then(res => res.json())
+        .then(res => {
+            return res
+        })
+    }
+    const changeSubscription = (subscription) => {
+        return fetch("http://localhost:8000/subscriptions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            },
+            body: JSON.stringify(subscription)
+        })
+            .then(() => getPublicProfiles())
     }
 
     return (
-        <UserContext.Provider value={{ 
-            getPublicProfiles, profiles, changeSubscribed, 
-            checkSubscribed, checkAuthenticated, 
+        <UserContext.Provider value={{
+            getPublicProfiles, profiles,
+            checkAuthenticated,
             logUserIn, getProfileById,
-            publicProfile }}>
+            publicProfile, changeSubscription
+        }}>
             {props.children}
         </UserContext.Provider>
     )
