@@ -42,7 +42,7 @@ export const Profile = () => {
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
             </div>
-            <AffirmationList profileId={profileId} profile={profile} />
+            <AffirmationList profile={profile} publicProfile={publicProfile} />
         </div>
     )
 }

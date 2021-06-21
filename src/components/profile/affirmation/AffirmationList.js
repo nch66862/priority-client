@@ -4,17 +4,26 @@ import { useParams } from "react-router-dom";
 import { AffirmationContext } from "./AffirmationProvider";
 import { AffirmationForm } from "./AffirmationForm";
 
-export const AffirmationList = ({ profile }) => {
+export const AffirmationList = ({ profile, publicProfile }) => {
     const { profileId } = useParams()
     const { getAffirmations, deleteAffirmation, affirmations } = useContext(AffirmationContext)
     useEffect(() => {
-        if (profile.priority) {
+        if (profileId) {
+            if (publicProfile.priority) {
+                getAffirmations(publicProfile.priority.id)
+            }
+        }
+        else if (profile.priority) {
             getAffirmations(profile.priority.id)
         }
         // eslint-disable-next-line
-    }, [profile])
+    }, [profile, publicProfile])
     const handleDeleteAffirmation = (event) => {
-        deleteAffirmation(event.target.id, profile.priority.id)
+        if (profileId) {
+            deleteAffirmation(event.target.id, publicProfile.priority.id)
+        } else {
+            deleteAffirmation(event.target.id, profile.priority.id)
+        }
     }
     return (
         <div>
@@ -34,7 +43,7 @@ export const AffirmationList = ({ profile }) => {
                             )
                         }) : <div>No affirmations yet</div>}
                     </ListGroup>
-                    {profileId && <AffirmationForm profile={profile} />}
+                    {profileId && <AffirmationForm publicProfile={publicProfile} />}
                 </>
             )
                 :
