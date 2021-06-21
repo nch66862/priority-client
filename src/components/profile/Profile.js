@@ -7,6 +7,7 @@ import './Profile.css'
 import { useParams } from "react-router-dom";
 import { AffirmationList } from './affirmation/AffirmationList'
 import { UserContext } from "../users/UserProvider";
+import { Statistics } from "./Statistics/Statistics";
 
 //just a container for a footer for completeness
 export const Profile = () => {
@@ -41,6 +42,7 @@ export const Profile = () => {
                 <div>because {profileId ? `${publicProfile.priority?.why}` : `I ${profile.priority?.why}`} .</div>
                 {!profileId && <Button onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
+                <Statistics />
             </div>
             <AffirmationList profile={profile} publicProfile={publicProfile} />
         </div>
