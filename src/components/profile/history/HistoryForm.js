@@ -3,10 +3,10 @@ import { ProfileContext } from '../ProfileProvider'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Form, FormGroup } from 'reactstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
-import { isYesterday, format } from 'date-fns'
+import { isYesterday } from 'date-fns'
 
 export const HistoryForm = ({ profile, toggle, modal }) => {
-    const { getWhat, submitHistory, whats } = useContext(ProfileContext)
+    const { getWhat, submitHistory, whats, getMyStatistics } = useContext(ProfileContext)
     const [historyEvent, setHistoryEvent] = useState({
         what_id: "",
         time_spent: profile.priority?.how,
@@ -48,10 +48,13 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
         setHistoryEvent(newHistoryEvent)
         formatVisibleDate(datetime)
     }
-    const handleSubmitHistory = () => {
-        historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
+    const handleSubmitHistory = (event) => {
+        event.preventDefault()
         submitHistory(historyEvent)
-            .then(() => toggle())
+            .then(() => {
+                toggle()
+                getMyStatistics()
+            })
     }
     return (
         <Modal isOpen={modal} toggle={toggle}>

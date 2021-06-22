@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { format } from 'date-fns'
 
 export const ProfileContext = createContext()
 
@@ -6,6 +7,7 @@ export const ProfileProvider = (props) => {
     const [whats, setWhats] = useState([])
     const [profile, setProfile] = useState({})
     const [myStatistics, setMyStatistics] = useState({})
+
     const getProfile = () => {
         return fetch("http://localhost:8000/users/my_profile", {
             method: "GET",
@@ -50,6 +52,7 @@ export const ProfileProvider = (props) => {
             .then(() => getWhat())
     }
     const submitHistory = (historyEvent) => {
+        historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
         return fetch("http://localhost:8000/history", {
             method: "POST",
             headers: {
