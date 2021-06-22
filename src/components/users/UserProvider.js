@@ -6,6 +6,7 @@ export const UserProvider = (props) => {
     const [profiles, setProfiles] = useState([])
     const [publicProfile, setPublicProfile] = useState({})
     const [userStatistics, setUserStatistics] = useState({})
+    const [userWhats, setUserWhats] = useState([])
     const logUserIn = (credentials) => {
         return fetch("https://nac-priority.herokuapp.com/login", {
             method: "POST",
@@ -77,13 +78,25 @@ export const UserProvider = (props) => {
             .then(res => res.json())
             .then(res => setUserStatistics(res))
     }
+    const getWhatById = (profileId) => {
+        return fetch(`https://nac-priority.herokuapp.com/what/${profileId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(res => setUserWhats(res))
+    }
     return (
         <UserContext.Provider value={{
             getPublicProfiles, profiles,
             checkAuthenticated, getSubscriptions,
             logUserIn, getProfileById,
             publicProfile, changeSubscription,
-            getUserStatistics, userStatistics
+            getUserStatistics, userStatistics,
+            getWhatById, userWhats
         }}>
             {props.children}
         </UserContext.Provider>
