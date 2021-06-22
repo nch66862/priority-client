@@ -50,7 +50,6 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
     }
     const handleSubmitHistory = () => {
         historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
-        debugger
         submitHistory(historyEvent)
             .then(() => toggle())
     }
