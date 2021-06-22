@@ -63,7 +63,7 @@ export const What = ({ profile }) => {
             </div>
             <ListGroup>
                 {profileId ? (
-                    whats.map(singleWhat => {
+                    userWhats.map(singleWhat => {
                         return (
                             <div key={singleWhat.id} className="whatItem">
                                 <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
@@ -72,7 +72,7 @@ export const What = ({ profile }) => {
                         )
                     })
                 ) : (
-                    userWhats.map(singleWhat => {
+                    whats.map(singleWhat => {
                         return (
                             <div key={singleWhat.id} className="whatItem">
                                 <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
