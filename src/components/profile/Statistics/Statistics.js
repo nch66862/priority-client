@@ -6,6 +6,7 @@ import { Streak } from "./Streak";
 import { useParams } from "react-router";
 import { ProfileContext } from "../ProfileProvider";
 import { UserContext } from "../../users/UserProvider";
+import './Statistics.css'
 
 //just a container for a footer for completeness
 export const Statistics = () => {
@@ -23,7 +24,7 @@ export const Statistics = () => {
     return (
         <div>
             <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
-            <div>
+            <div className="statFlexBox">
                 <Streak myStatistics={myStatistics} userStatistics={userStatistics} />
                 <WeekTotal myStatistics={myStatistics} userStatistics={userStatistics} />
                 <AllTime myStatistics={myStatistics} userStatistics={userStatistics} />
