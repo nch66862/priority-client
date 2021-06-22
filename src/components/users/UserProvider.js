@@ -5,6 +5,7 @@ export const UserContext = createContext()
 export const UserProvider = (props) => {
     const [profiles, setProfiles] = useState([])
     const [publicProfile, setPublicProfile] = useState({})
+    const [userStatistics, setUserStatistics] = useState({})
     const logUserIn = (credentials) => {
         return fetch("http://localhost:8000/login", {
             method: "POST",
@@ -65,13 +66,24 @@ export const UserProvider = (props) => {
         })
             .then(() => getPublicProfiles())
     }
-
+    const getUserStatistics = (profileId) => {
+        return fetch(`http://localhost:8000/history/${profileId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(res => setUserStatistics(res))
+    }
     return (
         <UserContext.Provider value={{
             getPublicProfiles, profiles,
             checkAuthenticated, getSubscriptions,
             logUserIn, getProfileById,
-            publicProfile, changeSubscription
+            publicProfile, changeSubscription,
+            getUserStatistics, userStatistics
         }}>
             {props.children}
         </UserContext.Provider>

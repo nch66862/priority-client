@@ -1,10 +1,13 @@
 import React, { createContext, useState } from "react";
+import { format } from 'date-fns'
 
 export const ProfileContext = createContext()
 
 export const ProfileProvider = (props) => {
     const [whats, setWhats] = useState([])
     const [profile, setProfile] = useState({})
+    const [myStatistics, setMyStatistics] = useState({})
+
     const getProfile = () => {
         return fetch("http://localhost:8000/users/my_profile", {
             method: "GET",
@@ -49,6 +52,7 @@ export const ProfileProvider = (props) => {
             .then(() => getWhat())
     }
     const submitHistory = (historyEvent) => {
+        historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
         return fetch("http://localhost:8000/history", {
             method: "POST",
             headers: {
@@ -67,8 +71,8 @@ export const ProfileProvider = (props) => {
             },
             body: JSON.stringify(profileIsPublic)
         })
-        .then(res => res.json())
-        .then(() => getProfile())
+            .then(res => res.json())
+            .then(() => getProfile())
     }
     const updatePriority = (newPriority) => {
         return fetch(`http://localhost:8000/priority/${newPriority.id}`, {
@@ -79,10 +83,21 @@ export const ProfileProvider = (props) => {
             },
             body: JSON.stringify(newPriority)
         })
-        .then (() => getProfile())
+            .then(() => getProfile())
+    }
+    const getMyStatistics = () => {
+        return fetch("http://localhost:8000/history", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(res => setMyStatistics(res))
     }
     return (
-        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy, updatePriority, profile }}>
+        <ProfileContext.Provider value={{ getProfile, getWhat, submitHistory, whats, setWhats, deleteWhat, saveWhat, changePrivacy, updatePriority, profile, getMyStatistics, myStatistics }}>
             {props.children}
         </ProfileContext.Provider>
     )

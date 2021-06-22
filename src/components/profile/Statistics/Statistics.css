@@ -1,0 +1,8 @@
+.statBox {
+    text-align: center;
+}
+
+.statFlexBox {
+    display: flex;
+    justify-content: space-between;
+}

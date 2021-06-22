@@ -3,10 +3,10 @@ import { ProfileContext } from '../ProfileProvider'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Form, FormGroup } from 'reactstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
-import { isYesterday, format } from 'date-fns'
+import { isYesterday } from 'date-fns'
 
 export const HistoryForm = ({ profile, toggle, modal }) => {
-    const { getWhat, submitHistory, whats } = useContext(ProfileContext)
+    const { getWhat, submitHistory, whats, getMyStatistics } = useContext(ProfileContext)
     const [historyEvent, setHistoryEvent] = useState({
         what_id: "",
         time_spent: profile.priority?.how,
@@ -48,11 +48,13 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
         setHistoryEvent(newHistoryEvent)
         formatVisibleDate(datetime)
     }
-    const handleSubmitHistory = () => {
-        historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
-        debugger
+    const handleSubmitHistory = (event) => {
+        event.preventDefault()
         submitHistory(historyEvent)
-            .then(() => toggle())
+            .then(() => {
+                toggle()
+                getMyStatistics()
+            })
     }
     return (
         <Modal isOpen={modal} toggle={toggle}>
@@ -61,7 +63,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
                     <ModalHeader>I spent my time...</ModalHeader>
                     <RadioGroup onChange={handleChangeWhat}>
                         {whats.map(singleWhat => {
-                            return <RadioButton rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
+                            return <RadioButton required rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
                         })}
                     </RadioGroup>
                     <div>
@@ -73,7 +75,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={handleSubmitHistory}>Submit</Button>
+                    <Button color="primary" type="submit" onClick={handleSubmitHistory}>Submit</Button>
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Form>
