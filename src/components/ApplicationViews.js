@@ -54,7 +54,6 @@ export const ApplicationViews = () => {
             <AffirmationProvider>
                 <Route exact path="/">
                     <Protected>
-                        {console.log("you hit profile")}
                         <Profile />
                     </Protected>
                 </Route>
