@@ -63,7 +63,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
                     <ModalHeader>I spent my time...</ModalHeader>
                     <RadioGroup onChange={handleChangeWhat}>
                         {whats.map(singleWhat => {
-                            return <RadioButton rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
+                            return <RadioButton required rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
                         })}
                     </RadioGroup>
                     <div>
@@ -75,7 +75,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={handleSubmitHistory}>Submit</Button>
+                    <Button color="primary" type="submit" onClick={handleSubmitHistory}>Submit</Button>
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Form>

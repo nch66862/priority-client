@@ -8,7 +8,7 @@ export const AllTime = ({ myStatistics, userStatistics }) => {
     return (
         <div className="statBox">
             <div>All Time</div>
-            <div>{profileId ? (userStatistics.total_time/60/24).toFixed(2) : (myStatistics.week_total/60/24).toFixed(2)}</div>
+            <div>{profileId ? (userStatistics.total_time/60/24).toFixed(2) : (myStatistics.total_time/60/24).toFixed(2)}</div>
             <div>Days</div>
         </div>
     )
