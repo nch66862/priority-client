@@ -3,6 +3,7 @@ import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 import { useParams } from "react-router-dom";
 import { AffirmationContext } from "./AffirmationProvider";
 import { AffirmationForm } from "./AffirmationForm";
+import './Affirmation.css'
 
 export const AffirmationList = ({ profile, publicProfile }) => {
     const { profileId } = useParams()
@@ -26,7 +27,7 @@ export const AffirmationList = ({ profile, publicProfile }) => {
         }
     }
     return (
-        <div>
+        <div className="affirmationSection">
             <h3>Affirmations</h3>
             {profile.priority?.is_public || profileId ? (
                 <>

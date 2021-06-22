@@ -27,7 +27,7 @@ export const Profile = () => {
     return (
         <div className="profile">
             <What profile={profile} />
-            <div>
+            <div className="profileSection">
                 <h1>Today</h1>
                 <h4>{new Date().toLocaleDateString("en-US",
                     {

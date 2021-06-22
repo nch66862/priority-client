@@ -24,7 +24,7 @@ export const NavBar = () => {
         // eslint-disable-next-line
     }, [])
     return (
-        <>
+        <div className="navBarSection">
             <Navbar>
                 <NavbarBrand href="/">Priority</NavbarBrand>
                 <NavItem className="navItem">
@@ -58,6 +58,6 @@ export const NavBar = () => {
             </Navbar>
             <VisibilityModal visibilityModal={visibilityModal}  toggleVisibilityModal={toggleVisibilityModal} />
             <PriorityModal priorityModal={priorityModal}  togglePriorityModal={togglePriorityModal} />
-        </>
+        </div>
     )
 }

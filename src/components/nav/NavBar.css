@@ -22,3 +22,8 @@
     list-style-type: none;
     cursor: pointer;
 }
+
+.navBarSection {
+    margin-left: 10px;
+    margin-right: 10px;
+}

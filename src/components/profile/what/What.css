@@ -1,0 +1,23 @@
+.whatSection {
+    width: 25%;
+}
+
+.listGroupItem {
+    border: none;
+    width: 100%;
+}
+
+.whatHeader {
+    display: flex;
+    align-items: center;
+}
+
+.whatItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orderedListOfWhats {
+    list-style: decimal;
+}

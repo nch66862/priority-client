@@ -3,11 +3,7 @@
     justify-content: space-between;
 }
 
-.whatHeader {
-    display: flex;
-}
-
-.whatItem {
-    display: flex;
-    justify-content: space-between;
+.profileSection {
+    margin: 0, 10px;
+    width: 47%;
 }
