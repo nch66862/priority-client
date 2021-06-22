@@ -109,8 +109,8 @@ export const Register = () => {
             </main>}
             {currentPage === 3 && <main style={{ textAlign: "center" }}>
                 <div className="whyWhatHowHeader">
-                    <h3>what</h3>
-                    <h3>What</h3>
+                    <h3><strong>Why</strong></h3>
+                    <h3 className="whyWhatHowMargin">What</h3>
                     <h3>How</h3>
                 </div>
                 <h3>Why is this your priority?</h3>
@@ -128,7 +128,7 @@ export const Register = () => {
             {currentPage === 4 && <main style={{ textAlign: "center" }}>
                 <div className="whyWhatHowHeader">
                     <h3>Why</h3>
-                    <h3>What</h3>
+                    <h3 className="whyWhatHowMargin"><strong>What</strong></h3>
                     <h3>How</h3>
                 </div>
                 <h3>What can you do to prioritize your priority?</h3>
@@ -146,8 +146,8 @@ export const Register = () => {
             {currentPage === 5 && <main style={{ textAlign: "center" }}>
                 <div className="whyWhatHowHeader">
                     <h3>Why</h3>
-                    <h3>What</h3>
-                    <h3>How</h3>
+                    <h3 className="whyWhatHowMargin">What</h3>
+                    <h3><strong>How</strong></h3>
                 </div>
                 <h3>Whether you realize it or not, you have just set a goal.</h3>
                 <h3>Goals are best met if you make a daily effort to achieve them. Large goals can be satisfying if they are tracked with small milestones.</h3>
