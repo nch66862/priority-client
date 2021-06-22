@@ -61,9 +61,9 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
             <Form>
                 <ModalBody>
                     <ModalHeader>I spent my time...</ModalHeader>
-                    <RadioGroup onChange={handleChangeWhat}>
+                    <RadioGroup onChange={handleChangeWhat} required>
                         {whats.map(singleWhat => {
-                            return <RadioButton required rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
+                            return <RadioButton rootColor="black" pointColor="Green" value={`${singleWhat.id}`} key={singleWhat.id}>{singleWhat.what}</RadioButton>
                         })}
                     </RadioGroup>
                     <div>
