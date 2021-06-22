@@ -8,7 +8,6 @@ export const Statistics = () => {
     }, [])
     return (
         <div>
-            Hi im statistics
             <LineChart />
         </div>
     )

@@ -23,21 +23,13 @@ export const LineChart = () => {
         <Line
             data={myStatistics.line_chart?.data}
             // data={profileId ? userStatistics.line_chart : myStatistics.line_chart} 
-            // data={} 
             height={400}
             width={600}
             options={{
                 scales: {
                     y: {
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        title: "time"
-                    },
-                    x: {
-                        ticks: {
-                            beginAtZero: true
-                        }
+                        beginAtZero: true,
+                        min: 0
                     }
                 },
                 elements: {
