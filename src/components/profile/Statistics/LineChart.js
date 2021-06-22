@@ -19,7 +19,9 @@ export const LineChart = () => {
     }, [])
     return (
         <Line 
-            data={profileId ? userStatistics : myStatistics} 
+            data={myStatistics.line_chart.data} 
+            // data={profileId ? userStatistics.line_chart : myStatistics.line_chart} 
+            // data={} 
             height={400}
             width={600}
         />
