@@ -64,10 +64,6 @@ export const ApplicationViews = () => {
                         <Community />
                     </Protected>
                 </Route>
-                {/* <Route exact path="/leaderboard">
-                    <Protected>
-                    </Protected>
-                </Route> */}
                 <Route exact path="/subscriptions">
                     <Protected>
                         <SubscriptionList />
