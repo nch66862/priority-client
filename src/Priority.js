@@ -12,7 +12,7 @@ export const Priority = () => (
     <>
         <Route
             render={() => {
-                if (localStorage.getItem("Priority_User") || localStorage.getItem("logged_in_user")) {
+                if (localStorage.getItem("priority_user_token") || localStorage.getItem("logged_in_user")) {
                     return (
                         <>
                             <section className="mainBody">
