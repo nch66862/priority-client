@@ -5,6 +5,7 @@ import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownTo
 import { ProfileContext } from "../profile/ProfileProvider";
 import { VisibilityModal } from "./privacy/VisibilityModal";
 import { PriorityModal } from "./profile/PriorityModal";
+import Logo from './PriorityLogo.png'
 
 export const NavBar = () => {
     const { getProfile, profile } = useContext(ProfileContext)
@@ -26,7 +27,7 @@ export const NavBar = () => {
     return (
         <div className="navBarSection">
             <Navbar>
-                <NavbarBrand href="/">Priority</NavbarBrand>
+                <NavbarBrand href="/"><img className="croppedLogo" src={Logo} alt="priority logo" /></NavbarBrand>
                 <NavItem className="navItem">
                     <NavLink onClick={() => history.push("/community")}>Community</NavLink>
                 </NavItem>

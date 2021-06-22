@@ -62,28 +62,27 @@ export const What = ({ profile }) => {
                 <h3>What will I prioritize?</h3>
                 {!profileId && <Button className="editWhatButton" color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
             </div>
-            <ul className="orderedListOfWhats">
+            <section className="orderedListOfWhats">
                 {profileId ? (
                     userWhats.map(singleWhat => {
                         return (
-                            <li key={singleWhat.id} className="whatItem">
+                            <article key={singleWhat.id} className="whatItem">
                                 <div className="listGroupItem" key={singleWhat.id} >{singleWhat.what}</div>
-                                {editMode && <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
-                            </li>
+                            </article>
                         )
                     })
                 ) : (
                     whats.map(singleWhat => {
                         return (
-                            <li key={singleWhat.id} className="whatItem">
+                            <article key={singleWhat.id} className="whatItem">
                                 <div className="listGroupItem" key={singleWhat.id} >{singleWhat.what}</div>
-                                {editMode && <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
-                            </li>
+                                {editMode && <Button className="deleteWhatButton" id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
+                            </article>
                         )
                     })
                 )
                 }
-            </ul>
+            </section>
             {editMode && (
                 <>
                     <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" placeholder="type an activity" />

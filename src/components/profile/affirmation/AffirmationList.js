@@ -31,19 +31,19 @@ export const AffirmationList = ({ profile, publicProfile }) => {
             <h3>Affirmations</h3>
             {profile.priority?.is_public || profileId ? (
                 <>
-                    <ListGroup>
+                    <section>
                         {affirmations.length ? affirmations.map(affirmation => {
                             return (
                                 <div key={affirmation.id} className="whatItem">
-                                    <ListGroupItem key={affirmation.id} >
+                                    <article key={affirmation.id} >
                                         <div>{affirmation.affirmation}</div>
                                         <div>-{affirmation.priority_user.user.first_name}</div>
-                                    </ListGroupItem>
+                                    </article>
                                     {affirmation.is_author && <Button id={affirmation.id} color="danger" onClick={handleDeleteAffirmation}>Delete</Button>}
                                 </div>
                             )
                         }) : <div>No affirmations yet</div>}
-                    </ListGroup>
+                    </section>
                     {profileId && <AffirmationForm publicProfile={publicProfile} />}
                 </>
             )
