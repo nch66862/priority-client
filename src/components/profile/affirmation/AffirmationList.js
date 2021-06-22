@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Button, ListGroup, ListGroupItem } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { useParams } from "react-router-dom";
 import { AffirmationContext } from "./AffirmationProvider";
 import { AffirmationForm } from "./AffirmationForm";

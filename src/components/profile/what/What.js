@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "../ProfileProvider"
-import { Button, ListGroup, ListGroupItem, Input, Modal, ModalBody } from 'reactstrap';
+import { Button, Input, Modal, ModalBody } from 'reactstrap';
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../users/UserProvider";
 import './What.css'

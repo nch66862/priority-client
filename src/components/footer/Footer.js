@@ -4,7 +4,7 @@ import './Footer.css'
 export const Footer = () => {
     return (
         <div className="footerCustom">
-
+            <div className="copyrightInfo">Copyright © 2021 <a href="https://github.com/nch66862">Nick Carver</a></div>
         </div>
     )
 }

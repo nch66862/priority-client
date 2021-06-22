@@ -7,6 +7,7 @@ import { Footer } from "./components/footer/Footer";
 import { UserProvider } from "./components/users/UserProvider";
 import { ApplicationViews } from "./components/ApplicationViews";
 import { ProfileProvider } from "./components/profile/ProfileProvider";
+import './Priority.css'
 //the application component. will handle routing to the application views if the user is logged in, or the login page if a user is not logged in
 export const Priority = () => (
     <>
