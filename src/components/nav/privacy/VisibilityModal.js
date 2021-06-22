@@ -27,7 +27,7 @@ export const VisibilityModal = ({ visibilityModal, toggleVisibilityModal }) => {
             <Modal isOpen={visibilityModal} toggle={toggleVisibilityModal}>
                 <ModalBody>
                     <ModalHeader>My Profile: {privacy?.is_public ? "Public" : "Private"}</ModalHeader>
-                    <RadioGroup horizontal onChange={handleChangePrivacy} value={privacy?.is_public}>
+                    <RadioGroup horizontal onChange={handleChangePrivacy} value={`${privacy?.is_public}`}>
                         <RadioButton rootColor="black" pointColor="Green" value="true">Public</RadioButton>
                         <RadioButton rootColor="black" pointColor="Green" value="false">Private</RadioButton>
                     </RadioGroup>

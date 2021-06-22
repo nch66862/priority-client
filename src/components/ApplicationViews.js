@@ -15,26 +15,28 @@ export const ApplicationViews = () => {
     const [serverIsLoading, setServerIsLoading] = useState(true)
     const history = useHistory()
     useEffect(() => {
-        let currentUser = {}
-        if (loggedInUser === "Nick") {
-            currentUser = {
-                username: "nick@nickcarver.com",
-                password: "pass"
-            }
-        }
-        else if (loggedInUser === "Logan") {
-            currentUser = {
-                username: "logan@loganlanning.com",
-                password: "pass"
-            }
-        }
-        logUserIn(currentUser)
-            .then(res => {
-                if ("valid" in res && res.valid) {
-                    localStorage.setItem("priority_user_token", res.token)
-                    setLoggedInUserObj(res)
+        if (history.location.pathname === "/loading") {
+            let currentUser = {}
+            if (loggedInUser === "Nick") {
+                currentUser = {
+                    username: "nick@nickcarver.com",
+                    password: "pass"
                 }
-            })
+            }
+            else if (loggedInUser === "Logan") {
+                currentUser = {
+                    username: "logan@loganlanning.com",
+                    password: "pass"
+                }
+            }
+            logUserIn(currentUser)
+                .then(res => {
+                    if ("valid" in res && res.valid) {
+                        localStorage.setItem("priority_user_token", res.token)
+                        setLoggedInUserObj(res)
+                    }
+                })
+        }
         // eslint-disable-next-line
     }, [])
     useEffect(() => {
@@ -52,6 +54,7 @@ export const ApplicationViews = () => {
             <AffirmationProvider>
                 <Route exact path="/">
                     <Protected>
+                        {console.log("you hit profile")}
                         <Profile />
                     </Protected>
                 </Route>
@@ -60,10 +63,10 @@ export const ApplicationViews = () => {
                         <Community />
                     </Protected>
                 </Route>
-                <Route exact path="/leaderboard">
+                {/* <Route exact path="/leaderboard">
                     <Protected>
                     </Protected>
-                </Route>
+                </Route> */}
                 <Route exact path="/subscriptions">
                     <Protected>
                         <SubscriptionList />
@@ -72,10 +75,6 @@ export const ApplicationViews = () => {
                 <Route exact path="/profiles/:profileId(\d+)">
                     <Protected>
                         <Profile />
-                    </Protected>
-                </Route>
-                <Route exact path="/profile/edit">
-                    <Protected>
                     </Protected>
                 </Route>
                 <Route exact path="/loading">

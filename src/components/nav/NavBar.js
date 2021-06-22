@@ -30,9 +30,9 @@ export const NavBar = () => {
                 <NavItem className="navItem">
                     <NavLink onClick={() => history.push("/community")}>Community</NavLink>
                 </NavItem>
-                <NavItem className="navItem">
+                {/* <NavItem className="navItem">
                     <NavLink onClick={() => history.push("/leaderboard")}>Leaderboard</NavLink>
-                </NavItem>
+                </NavItem> */}
                 <NavItem className="navItem">
                     <NavLink onClick={() => history.push("/subscriptions")}>Subscriptions</NavLink>
                 </NavItem>

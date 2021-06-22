@@ -33,7 +33,7 @@ export const Register = () => {
     //performs a post to the database when registering a new memeber
     const handleRegister = (event) => {
         event.preventDefault()
-        return fetch("https://nac-priority.herokuapp.com/register", {
+        return fetch("http://localhost:8000/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export const Register = () => {
                     </FormGroup>
                     <FormGroup>
                         <Button onClick={handleCancelRegister}>Cancel</Button>
-                        <Button onClick={advancePage}>Next</Button>
+                        <Button disabled={registerUser.first_name === "" || registerUser.last_name === "" || registerUser.email === "" || registerUser.password === ""} onClick={advancePage}>Next</Button>
                     </FormGroup>
                 </Form>
             </main>}
@@ -104,7 +104,7 @@ export const Register = () => {
                 <FormGroup>
                     <Button onClick={handleCancelRegister}>Cancel</Button>
                     <Button onClick={backPage}>Go Back</Button>
-                    <Button onClick={advancePage}>Next</Button>
+                    <Button disabled={registerUser.priority === ""} onClick={advancePage}>Next</Button>
                 </FormGroup>
             </main>}
             {currentPage === 3 && <main style={{ textAlign: "center" }}>
@@ -122,7 +122,7 @@ export const Register = () => {
                 <FormGroup>
                     <Button onClick={handleCancelRegister}>Cancel</Button>
                     <Button onClick={backPage}>Go Back</Button>
-                    <Button onClick={advancePage}>Next</Button>
+                    <Button disabled={registerUser.why === ""} onClick={advancePage}>Next</Button>
                 </FormGroup>
             </main>}
             {currentPage === 4 && <main style={{ textAlign: "center" }}>
@@ -140,7 +140,7 @@ export const Register = () => {
                 <FormGroup>
                     <Button onClick={handleCancelRegister}>Cancel</Button>
                     <Button onClick={backPage}>Go Back</Button>
-                    <Button onClick={advancePage}>Next</Button>
+                    <Button disabled={registerUser.what === ""} onClick={advancePage}>Next</Button>
                 </FormGroup>
             </main>}
             {currentPage === 5 && <main style={{ textAlign: "center" }}>
