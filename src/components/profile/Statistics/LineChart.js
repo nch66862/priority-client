@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom";
-import { Line } from 'react-chartjs-2'
+import { Line, defaults, Chart } from 'react-chartjs-2'
 import { ProfileContext } from "../ProfileProvider";
 import { UserContext } from "../../users/UserProvider";
 
@@ -17,13 +17,35 @@ export const LineChart = () => {
         }
         // eslint-disable-next-line
     }, [])
+    defaults.plugins.legend.display = false
+    defaults.font.size = 16
     return (
-        <Line 
-            data={myStatistics.line_chart.data} 
+        <Line
+            data={myStatistics.line_chart?.data}
             // data={profileId ? userStatistics.line_chart : myStatistics.line_chart} 
             // data={} 
             height={400}
             width={600}
+            options={{
+                scales: {
+                    y: {
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        title: "time"
+                    },
+                    x: {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0.3
+                    }
+                }
+            }}
         />
     )
 }
