@@ -7,7 +7,7 @@ export const UserProvider = (props) => {
     const [publicProfile, setPublicProfile] = useState({})
     const [userStatistics, setUserStatistics] = useState({})
     const logUserIn = (credentials) => {
-        return fetch("http://localhost:8000/login", {
+        return fetch("https://nac-priority.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export const UserProvider = (props) => {
             .then(res => res.json())
     }
     const getPublicProfiles = () => {
-        return fetch("http://localhost:8000/users", {
+        return fetch("https://nac-priority.herokuapp.com/users", {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
@@ -26,7 +26,7 @@ export const UserProvider = (props) => {
         .then(setProfiles)
     }
     const getSubscriptions = () => {
-        return fetch("http://localhost:8000/users/subscriptions", {
+        return fetch("https://nac-priority.herokuapp.com/users/subscriptions", {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
@@ -35,7 +35,7 @@ export const UserProvider = (props) => {
         .then(setProfiles)
     }
     const getProfileById = (profileId) => {
-        return fetch(`http://localhost:8000/users/${profileId}`, {
+        return fetch(`https://nac-priority.herokuapp.com/users/${profileId}`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
             }
@@ -44,7 +44,7 @@ export const UserProvider = (props) => {
         .then(res => setPublicProfile(res))
     }
     const checkAuthenticated = () => {
-        return fetch(`http://localhost:8000/check-active`, {
+        return fetch(`https://nac-priority.herokuapp.com/check-active`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("priority_user_token")}`
@@ -56,7 +56,7 @@ export const UserProvider = (props) => {
         })
     }
     const changeSubscription = (subscription) => {
-        return fetch("http://localhost:8000/subscriptions", {
+        return fetch("https://nac-priority.herokuapp.com/subscriptions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const UserProvider = (props) => {
             .then(() => getPublicProfiles())
     }
     const getUserStatistics = (profileId) => {
-        return fetch(`http://localhost:8000/history/${profileId}`, {
+        return fetch(`https://nac-priority.herokuapp.com/history/${profileId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

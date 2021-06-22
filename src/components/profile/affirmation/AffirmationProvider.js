@@ -5,7 +5,7 @@ export const AffirmationContext = createContext()
 export const AffirmationProvider = (props) => {
     const [affirmations, setAffirmations] = useState([])
     const getAffirmations = (priorityId) => {
-        return fetch(`http://localhost:8000/affirmations/${priorityId}`, {
+        return fetch(`https://nac-priority.herokuapp.com/affirmations/${priorityId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const AffirmationProvider = (props) => {
             .then(res => setAffirmations(res))
     }
     const createAffirmation = (newAffirmation) => {
-        return fetch(`http://localhost:8000/affirmations`, {
+        return fetch(`https://nac-priority.herokuapp.com/affirmations`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const AffirmationProvider = (props) => {
             .then(() => getAffirmations(newAffirmation.priority_id))
     }
     const deleteAffirmation = (affirmationId, priorityId) => {
-        return fetch(`http://localhost:8000/affirmations/${affirmationId}`, {
+        return fetch(`https://nac-priority.herokuapp.com/affirmations/${affirmationId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
