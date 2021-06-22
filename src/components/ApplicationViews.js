@@ -40,7 +40,6 @@ export const ApplicationViews = () => {
         // eslint-disable-next-line
     }, [])
     useEffect(() => {
-        debugger
         if (loggedInUserObj.valid) {
             setServerIsLoading(false)
             history.push("/")
