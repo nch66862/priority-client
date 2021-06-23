@@ -53,7 +53,7 @@ export const NavBar = () => {
                         </UncontrolledDropdown>
                     </>
                 )}
-                <NavbarText>Welcome, {profile.user?.user.first_name}</NavbarText>
+                <NavbarText>Welcome, {profile.user?.user.first_name} {profile.user?.user.last_name}</NavbarText>
             </Navbar>
             <VisibilityModal visibilityModal={visibilityModal} toggleVisibilityModal={toggleVisibilityModal} />
             <PriorityModal priorityModal={priorityModal} togglePriorityModal={togglePriorityModal} />
