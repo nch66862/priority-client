@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "../ProfileProvider"
-import { Button, ListGroup, ListGroupItem, Input, Modal, ModalBody } from 'reactstrap';
+import { Button, Input, Modal, ModalBody } from 'reactstrap';
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../users/UserProvider";
+import './What.css'
 
 export const What = ({ profile }) => {
     const { profileId } = useParams()
@@ -50,7 +51,7 @@ export const What = ({ profile }) => {
             }))
     }
     return (
-        <div>
+        <div className="whatSection">
             <Modal isOpen={deleteWhatError} toggle={toggleDeleteWhatError}>
                 <ModalBody>
                     <h4>You need at least one way to reach your goal</h4>
@@ -59,34 +60,33 @@ export const What = ({ profile }) => {
             </Modal>
             <div className="whatHeader">
                 <h3>What will I prioritize?</h3>
-                {!profileId && <Button color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
+                {!profileId && <Button className="editWhatButton" color="secondary" onClick={toggleEditMode}>{editMode ? "Done" : "Edit"}</Button>}
             </div>
-            <ListGroup>
+            <section className="orderedListOfWhats">
                 {profileId ? (
                     userWhats.map(singleWhat => {
                         return (
-                            <div key={singleWhat.id} className="whatItem">
-                                <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
-                                {editMode && <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
-                            </div>
+                            <article key={singleWhat.id} className="whatItem">
+                                <div className="listGroupItem" key={singleWhat.id} >{singleWhat.what}</div>
+                            </article>
                         )
                     })
                 ) : (
                     whats.map(singleWhat => {
                         return (
-                            <div key={singleWhat.id} className="whatItem">
-                                <ListGroupItem key={singleWhat.id} >{singleWhat.what}</ListGroupItem>
-                                {editMode && <Button id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
-                            </div>
+                            <article key={singleWhat.id} className="whatItem">
+                                <div className="listGroupItem" key={singleWhat.id} >{singleWhat.what}</div>
+                                {editMode && <Button className="deleteWhatButton" id={singleWhat.id} color="danger" onClick={handleDeleteWhat}>Delete</Button>}
+                            </article>
                         )
                     })
                 )
                 }
-            </ListGroup>
+            </section>
             {editMode && (
                 <>
                     <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" placeholder="type an activity" />
-                    <Button onClick={handleSubmitWhat}>Save</Button>
+                    <Button color="primary" onClick={handleSubmitWhat}>Save</Button>
                 </>
             )}
         </div>

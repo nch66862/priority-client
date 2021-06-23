@@ -11,7 +11,7 @@ export const LineChart = ({ myStatistics, userStatistics }) => {
         <Line
             data={profileId ? userStatistics.line_chart?.data : myStatistics.line_chart?.data} 
             height={400}
-            width={600}
+            width={500}
             options={{
                 scales: {
                     y: {

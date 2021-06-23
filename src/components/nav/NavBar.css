@@ -22,3 +22,27 @@
     list-style-type: none;
     cursor: pointer;
 }
+
+.navText {
+    color: black;
+}
+
+.arrowBesideMenuItem {
+    display: flex;
+}
+
+.navBarSection {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.croppedLogo {
+    width: 200px; /* width of container */
+    height: 50px; /* height of container */
+    object-fit: cover;
+    object-position: 50% 47%; /* try 20px 10px */ 
+}
+
+.croppedLogo img {
+    margin: -10px 0px 0px -180px;
+}

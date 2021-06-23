@@ -1,7 +1,11 @@
 .footerCustom {
-    background-color: rgb(2, 61, 110);
+    background-color: #2F3061;
     height: 30px;
-    position: sticky;
-    bottom: 0;
     width: 100%;
+    margin: 0;
+}
+
+.copyrightInfo {
+    text-align: center;
+    color: #FFED65;
 }

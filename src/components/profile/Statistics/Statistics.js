@@ -26,7 +26,9 @@ export const Statistics = () => {
             <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
             <div className="statFlexBox">
                 <Streak myStatistics={myStatistics} userStatistics={userStatistics} />
+                <div className="centerStatBox"></div>
                 <WeekTotal myStatistics={myStatistics} userStatistics={userStatistics} />
+                <div className="centerStatBox"></div>
                 <AllTime myStatistics={myStatistics} userStatistics={userStatistics} />
             </div>
         </div>

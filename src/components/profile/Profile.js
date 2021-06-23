@@ -27,7 +27,7 @@ export const Profile = () => {
     return (
         <div className="profile">
             <What profile={profile} />
-            <div>
+            <div className="profileSection">
                 <h1>Today</h1>
                 <h4>{new Date().toLocaleDateString("en-US",
                     {
@@ -35,12 +35,12 @@ export const Profile = () => {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
-                        timeZone: "UTC"
+                        timeZone: "CST"
                     })}
                 </h4>
                 <h2>{profileId ? publicProfile.priority?.priority : profile.priority?.priority} is {profileId ? `${publicProfile.user?.user.first_name}'s` : "my"} priority</h2>
                 <div>because {profileId ? `${publicProfile.priority?.why}` : `${profile.priority?.why}`}</div>
-                {!profileId && <Button onClick={toggle}>Input Time</Button>}
+                {!profileId && <Button color="primary" className="inputTimeButton" onClick={toggle}>Input Time</Button>}
                 {modal && <HistoryForm profile={profile} toggle={toggle} modal={modal} />}
                 <Statistics />
             </div>

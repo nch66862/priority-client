@@ -3,11 +3,13 @@
     justify-content: space-between;
 }
 
-.whatHeader {
-    display: flex;
+.profileSection {
+    margin: 0, 10px;
+    width: 47%;
 }
 
-.whatItem {
-    display: flex;
-    justify-content: space-between;
+.inputTimeButton {
+    background-color: #2F3061;
+    width: 100%;
+    padding: 1px;
 }

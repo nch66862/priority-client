@@ -1,0 +1,29 @@
+.whatSection {
+    width: 25%;
+}
+
+.listGroupItem {
+    border: none;
+    width: 100%;
+}
+
+.whatHeader {
+    display: flex;
+    align-items: center;
+}
+
+.whatItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(122, 122, 122);
+    padding-bottom: 5px;
+}
+
+.orderedListOfWhats {
+    list-style: decimal;
+}
+
+.deleteWhatButton {
+    margin-top: 3px;
+}

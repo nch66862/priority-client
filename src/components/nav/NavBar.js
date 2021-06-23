@@ -5,6 +5,7 @@ import { Navbar, NavbarBrand, NavItem, NavLink, UncontrolledDropdown, DropdownTo
 import { ProfileContext } from "../profile/ProfileProvider";
 import { VisibilityModal } from "./privacy/VisibilityModal";
 import { PriorityModal } from "./profile/PriorityModal";
+import Logo from '../images/PriorityLogo.png'
 
 export const NavBar = () => {
     const { getProfile, profile } = useContext(ProfileContext)
@@ -24,40 +25,38 @@ export const NavBar = () => {
         // eslint-disable-next-line
     }, [])
     return (
-        <>
-            <Navbar>
-                <NavbarBrand href="/">Priority</NavbarBrand>
+        <div className="navBarSection">
+            <Navbar color="black">
+                <NavbarBrand href="/"><img className="croppedLogo" src={Logo} alt="priority logo" /></NavbarBrand>
                 <NavItem className="navItem">
-                    <NavLink onClick={() => history.push("/community")}>Community</NavLink>
+                    <NavLink onClick={() => history.push("/community")}><div className="navText">Community</div></NavLink>
                 </NavItem>
                 <NavItem className="navItem">
-                    <NavLink onClick={() => history.push("/subscriptions")}>Subscriptions</NavLink>
+                    <NavLink onClick={() => history.push("/subscriptions")}><div className="navText">Subscriptions</div></NavLink>
                 </NavItem>
                 {(localStorage.getItem("priority_user_token") !== null) && (
                     <>
                         <UncontrolledDropdown nav inNavbar className="navItem">
-                            <DropdownToggle nav caret>
-                                Profile
-                            </DropdownToggle>
+                            <DropdownToggle nav caret>Profile</DropdownToggle>
                             <DropdownMenu right>
                                 <DropdownItem onClick={toggleVisibilityModal}>
-                                    Change your visibility
+                                    <div className="navText">Change your visibility</div>
                                 </DropdownItem>
                                 <DropdownItem onClick={togglePriorityModal}>
-                                    Change your priority
+                                    <div className="navText">Change your priority</div>
                                 </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={handleLogout}>
-                                    Logout
+                                    <div className="navText">Logout</div>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </>
                 )}
-                <NavbarText>Welcome, {profile.user?.user.first_name}</NavbarText>
+                <NavbarText>Welcome, {profile.user?.user.first_name} {profile.user?.user.last_name}</NavbarText>
             </Navbar>
-            <VisibilityModal visibilityModal={visibilityModal}  toggleVisibilityModal={toggleVisibilityModal} />
-            <PriorityModal priorityModal={priorityModal}  togglePriorityModal={togglePriorityModal} />
-        </>
+            <VisibilityModal visibilityModal={visibilityModal} toggleVisibilityModal={toggleVisibilityModal} />
+            <PriorityModal priorityModal={priorityModal} togglePriorityModal={togglePriorityModal} />
+        </div>
     )
 }

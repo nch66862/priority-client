@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Form, FormGr
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import DatePicker from 'react-date-picker';
 import { isYesterday } from 'date-fns'
+import './HistoryForm.css'
 
 export const HistoryForm = ({ profile, toggle, modal }) => {
     const { getWhat, submitHistory, whats, getMyStatistics } = useContext(ProfileContext)
@@ -13,6 +14,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
         goal_date: new Date()
     })
     const [visibleDate, setVisibleDate] = useState("today")
+    const [errorMessage, setErrorMessage] = useState(false)
     useEffect(() => {
         getWhat()
         // eslint-disable-next-line
@@ -36,6 +38,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
         let newHistoryEvent = { ...historyEvent }
         newHistoryEvent.what_id = whatId
         setHistoryEvent(newHistoryEvent)
+        setErrorMessage(false)
     }
     const handleChangeTime = (event) => {
         let newHistoryEvent = { ...historyEvent }
@@ -50,11 +53,15 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
     }
     const handleSubmitHistory = (event) => {
         event.preventDefault()
-        submitHistory(historyEvent)
-            .then(() => {
-                toggle()
-                getMyStatistics()
-            })
+        if (historyEvent.what_id === "") {
+            setErrorMessage(true)
+        } else {
+            submitHistory(historyEvent)
+                .then(() => {
+                    toggle()
+                    getMyStatistics()
+                })
+        }
     }
     return (
         <Modal isOpen={modal} toggle={toggle}>
@@ -73,6 +80,7 @@ export const HistoryForm = ({ profile, toggle, modal }) => {
                         <Label>Change the Date</Label><br></br>
                         <DatePicker onChange={handleChangeDate} value={historyEvent.goal_date} />
                     </FormGroup>
+                    {errorMessage && <h6 className="errorMessage">please choose how you spent your time</h6>}
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" type="submit" onClick={handleSubmitHistory}>Submit</Button>
