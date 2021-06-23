@@ -7,3 +7,9 @@
     margin: 0, 10px;
     width: 47%;
 }
+
+.inputTimeButton {
+    background-color: #2F3061;
+    width: 100%;
+    padding: 1px;
+}

@@ -1,5 +1,5 @@
 .footerCustom {
-    background-color: #2CD6BA;
+    background-color: #2F3061;
     height: 30px;
     width: 100%;
     margin: 0;
@@ -7,4 +7,5 @@
 
 .copyrightInfo {
     text-align: center;
+    color: #FFED65;
 }

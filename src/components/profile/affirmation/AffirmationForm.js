@@ -31,7 +31,7 @@ export const AffirmationForm = ({ publicProfile }) => {
     return (
         <div>
             <Input onChange={handleInputChange} value={affirmation.affirmation} id="affirmation" type="text" name="affirmation" placeholder="write an affirmation" />
-            <Button onClick={handleSubmitAffirmation}>Post</Button>
+            <Button color="primary" onClick={handleSubmitAffirmation}>Post</Button>
         </div>
     )
 }

@@ -86,7 +86,7 @@ export const What = ({ profile }) => {
             {editMode && (
                 <>
                     <Input onChange={handleInputChange} value={what.what} id="what" type="text" name="what" placeholder="type an activity" />
-                    <Button onClick={handleSubmitWhat}>Save</Button>
+                    <Button color="primary" onClick={handleSubmitWhat}>Save</Button>
                 </>
             )}
         </div>

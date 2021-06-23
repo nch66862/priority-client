@@ -1,0 +1,31 @@
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 985px;
+    background-color: #EFE9F4;
+  }
+
+  .loginLogo {
+    width: 200px; /* width of container */
+    height: 50px; /* height of container */
+    object-fit: cover;
+    object-position: 50% 47%; /* try 20px 10px */ 
+    margin-bottom: 50px;
+}
+
+.registrationButton {
+    color: black;
+}
+
+.loginButton {
+    width: 400px;
+    margin: 5px 0;
+}
