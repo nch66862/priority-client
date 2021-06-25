@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useHistory, Link } from "react-router-dom";
 import './Login.css'
 import Logo from '../images/PriorityLogo.png'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { UserContext } from "../users/UserProvider";
 //This is a form to log an existing user in
 export const Login = () => {
+    const { logUserIn } = useContext(UserContext)
     const history = useHistory()
     const [user, setUser] = useState({
         username: "",
@@ -23,15 +25,7 @@ export const Login = () => {
     }
     const handleLogin = (event) => {
         event.preventDefault()
-        return fetch("http://localhost:8000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
+        logUserIn(user)
             .then(res => {
                 if ("valid" in res && res.valid) {
                     localStorage.setItem("priority_user_token", res.token)
@@ -40,7 +34,7 @@ export const Login = () => {
             })
     }
     const handleInputChange = (event) => {
-        let modifiedUser = {...user}
+        let modifiedUser = { ...user }
         modifiedUser[event.target.name] = event.target.value
         setUser(modifiedUser)
     }
@@ -60,7 +54,7 @@ export const Login = () => {
                 <Form>
                     <FormGroup className="registerFormPage1">
                         <Label for="inputEmail">Email address</Label>
-                        <Input onChange={handleInputChange} type="email" name="email" placeholder="email" value={user.email} id="email" autoComplete="email" required />
+                        <Input onChange={handleInputChange} type="email" name="username" placeholder="email" value={user.email} id="email" autoComplete="email" required />
                     </FormGroup>
                     <FormGroup className="registerFormPage1">
                         <Label for="inputPassword">Create Password</Label>

@@ -9,7 +9,7 @@ export const ProfileProvider = (props) => {
     const [myStatistics, setMyStatistics] = useState(false)
 
     const getProfile = () => {
-        return fetch("http://localhost:8000/users/my_profile", {
+        return fetch("https://nac-priority.herokuapp.com/users/my_profile", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const ProfileProvider = (props) => {
             .then(res => setProfile(res))
     }
     const getWhat = () => {
-        return fetch("http://localhost:8000/what", {
+        return fetch("https://nac-priority.herokuapp.com/what", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export const ProfileProvider = (props) => {
             .then(res => setWhats(res))
     }
     const saveWhat = (newWhat) => {
-        return fetch("http://localhost:8000/what", {
+        return fetch("https://nac-priority.herokuapp.com/what", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const ProfileProvider = (props) => {
             .then(() => getWhat())
     }
     const deleteWhat = (whatId) => {
-        return fetch(`http://localhost:8000/what/${whatId}`, {
+        return fetch(`https://nac-priority.herokuapp.com/what/${whatId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const ProfileProvider = (props) => {
     }
     const submitHistory = (historyEvent) => {
         historyEvent.goal_date = format(historyEvent.goal_date, "yyyy-MM-dd")
-        return fetch("http://localhost:8000/history", {
+        return fetch("https://nac-priority.herokuapp.com/history", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export const ProfileProvider = (props) => {
         })
     }
     const changePrivacy = (profileIsPublic) => {
-        return fetch("http://localhost:8000/users/change_privacy", {
+        return fetch("https://nac-priority.herokuapp.com/users/change_privacy", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export const ProfileProvider = (props) => {
             .then(() => getProfile())
     }
     const updatePriority = (newPriority) => {
-        return fetch(`http://localhost:8000/priority/${newPriority.id}`, {
+        return fetch(`https://nac-priority.herokuapp.com/priority/${newPriority.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export const ProfileProvider = (props) => {
             .then(() => getProfile())
     }
     const getMyStatistics = () => {
-        return fetch("http://localhost:8000/history", {
+        return fetch("https://nac-priority.herokuapp.com/history", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
