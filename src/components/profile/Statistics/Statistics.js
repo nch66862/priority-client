@@ -32,7 +32,7 @@ export const Statistics = () => {
                 <div className="centerStatBox"></div>
                 <AllTime myStatistics={myStatistics} userStatistics={userStatistics} />
             </div>
-            <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
+            {myStatistics.pie_chart?.labels.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />}
         </div>
     )
 }
