@@ -9,7 +9,6 @@ export const LineChart = ({ myStatistics, userStatistics }) => {
     defaults.font.size = 16
     return (
         <Line
-            // data={profileId ? userStatistics.line_chart?.data : myStatistics.line_chart?.data} 
             data={{
                 labels: (profileId ? userStatistics.line_chart?.labels : myStatistics.line_chart?.labels),
                 datasets: [

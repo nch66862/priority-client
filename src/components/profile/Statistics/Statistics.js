@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { AllTime } from "./AllTime";
 import { LineChart } from "./LineChart";
+import { PieChart } from "./PieChart";
 import { WeekTotal } from "./WeekTotal";
 import { Streak } from "./Streak";
 import { useParams } from "react-router";
@@ -31,6 +32,11 @@ export const Statistics = () => {
                 <div className="centerStatBox"></div>
                 <AllTime myStatistics={myStatistics} userStatistics={userStatistics} />
             </div>
+            {profileId ? (
+                userStatistics.pie_chart?.labels.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
+            ) : (
+                myStatistics.pie_chart?.labels.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
+            )}
         </div>
     )
 }
