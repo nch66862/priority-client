@@ -34,7 +34,7 @@ export const Register = () => {
     //performs a post to the database when registering a new memeber
     const handleRegister = (event) => {
         event.preventDefault()
-        return fetch("https://nac-priority.herokuapp.com/register", {
+        return fetch("http://localhost:8000/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
