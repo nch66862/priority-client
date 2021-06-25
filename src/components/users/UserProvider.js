@@ -5,7 +5,7 @@ export const UserContext = createContext()
 export const UserProvider = (props) => {
     const [profiles, setProfiles] = useState([])
     const [publicProfile, setPublicProfile] = useState({})
-    const [userStatistics, setUserStatistics] = useState({})
+    const [userStatistics, setUserStatistics] = useState(false)
     const [userWhats, setUserWhats] = useState([])
     const logUserIn = (credentials) => {
         return fetch("http://localhost:8000/login", {
