@@ -40,8 +40,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Visual Samples
 
-### Today
-<img src="./images/Today.png" alt="logo" width="300" />
+### User Profile
+<video width="550" height="300" controls>
+  <source src="./src/components/images/UserProfile.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Jobs
 <img src="./images/Jobs.png" alt="logo" width="300" />
