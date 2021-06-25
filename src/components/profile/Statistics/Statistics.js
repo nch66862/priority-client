@@ -25,9 +25,9 @@ export const Statistics = () => {
     return (
         <div>
             {profileId ? (
-                userStatistics.line_chart?.labels.length && <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
+                userStatistics.line_chart?.labels?.length && <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
             ) : (
-                myStatistics.line_chart?.labels.length && <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
+                myStatistics.line_chart?.labels?.length && <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
             )}
             <div className="statFlexBox">
                 <Streak myStatistics={myStatistics} userStatistics={userStatistics} />
@@ -37,9 +37,9 @@ export const Statistics = () => {
                 <AllTime myStatistics={myStatistics} userStatistics={userStatistics} />
             </div>
             {profileId ? (
-                userStatistics.pie_chart?.labels.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
+                userStatistics.pie_chart?.labels?.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
             ) : (
-                myStatistics.pie_chart?.labels.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
+                myStatistics.pie_chart?.labels?.length && <PieChart myStatistics={myStatistics} userStatistics={userStatistics} />
             )}
         </div>
     )
