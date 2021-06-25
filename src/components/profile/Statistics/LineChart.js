@@ -10,11 +10,11 @@ export const LineChart = ({ myStatistics, userStatistics }) => {
     return (
         <Line
             data={{
-                labels: (profileId ? userStatistics.line_chart?.labels : myStatistics.line_chart?.labels),
+                labels: (profileId ? userStatistics.line_chart.labels : myStatistics.line_chart.labels),
                 datasets: [
                     {
                         label: 'time',
-                        data: (profileId ? userStatistics.line_chart?.data : myStatistics.line_chart?.data),
+                        data: (profileId ? userStatistics.line_chart.data : myStatistics.line_chart.data),
                         color: ['black'],
                         borderColor: ['black'],
                         borderWidth: 1
