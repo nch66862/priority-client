@@ -24,7 +24,11 @@ export const Statistics = () => {
     }, [])
     return (
         <div>
-            <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
+            {profileId ? (
+                userStatistics.line_chart?.labels.length && <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
+            ) : (
+                myStatistics.line_chart?.labels.length && <LineChart myStatistics={myStatistics} userStatistics={userStatistics} />
+            )}
             <div className="statFlexBox">
                 <Streak myStatistics={myStatistics} userStatistics={userStatistics} />
                 <div className="centerStatBox"></div>
