@@ -1,7 +1,5 @@
 <img align="center" src="./src/components/images/PriorityLogo.png" alt="priority logo" />
 
-<p align="center">**Documentation in Progress**</p>
-
 
 ### [Site is LIVE here](https://nac-priority.netlify.app)
 
