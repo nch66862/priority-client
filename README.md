@@ -1,4 +1,4 @@
-<img style={{backgroundColor: "white"}} src="./src/components/images/PriorityLogo.png" alt="priority logo" />
+<img src="./src/components/images/PriorityLogo.png" alt="priority logo" />
 
 
 ### [Site is LIVE here](https://nac-priority.netlify.app)
