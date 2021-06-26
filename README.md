@@ -41,19 +41,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Visual Samples
 
 ### User Profile
-<video width="550" height="300" controls>
-  <source src="./src/components/images/UserProfile.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://user-images.githubusercontent.com/66451847/123524031-55042580-d68d-11eb-9ac1-441e730d3d28.mov
 
-### Jobs
-<img src="./images/Jobs.png" alt="logo" width="300" />
+### Editing A Profile
+https://user-images.githubusercontent.com/66451847/123524064-7238f400-d68d-11eb-9428-0950a10ca24d.mov
 
-### Friends
-<img src="./images/Friends.png" alt="logo" width="300" />
+### Viewing Other Profiles
+https://user-images.githubusercontent.com/66451847/123524077-85e45a80-d68d-11eb-9a85-b4c5ba4aed7a.mov
 
-## GIF Demo
-<img src="./images/Demo.GIF" alt="Demo" />
+### Subscribing to Users
+https://user-images.githubusercontent.com/66451847/123524084-91378600-d68d-11eb-8dc2-1a9eea80d507.mov
+
+### Catching Input Errors
+https://user-images.githubusercontent.com/66451847/123524115-ba581680-d68d-11eb-8662-7b6aa915b8e9.mov
 
 ## Installation
 
