@@ -93,10 +93,6 @@ prefer)
 ---
 ---
 
-## Contributing
-
-The more the merrier! Please feel free to fork this repository and create a pull request with any changes or improvements you can think of.
-
 ## Author & Acknowledgements
 
 Built by [Nick Carver](https://github.com/nch66862) in 2021
