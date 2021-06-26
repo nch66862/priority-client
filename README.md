@@ -2,6 +2,7 @@
 
 
 ### [Site is LIVE here](https://nac-priority.netlify.app)
+***Getting the charts to display has been a battle on the deployed application***
 
 ### [Server Repo](https://github.com/nch66862/priority-server)
 
